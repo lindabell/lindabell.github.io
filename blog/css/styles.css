@@ -4,11 +4,18 @@
 body { font: 12px "ËÎÌå", "Arial Narrow", HELVETICA; color: #3F3E3C; line-height: 1.5; background: #333; }
 img { border: 0; vertical-align: middle }
 h1, h2, h3, h4, h5, h6 { font-weight: normal; }
-h1 { font: 24px "Î¢ÈíÑÅºÚ", "Microsoft YaHei", Arial, Helvetica, sans-serif }
+h1 {
+	font-family: "Î¢ÈíÑÅºÚ", "Microsoft YaHei", Arial, Helvetica, sans-serif;
+	color: #F00;
+	font-size: 24px;
+}
 p { word-wrap: break-word }
 ul, ol { list-style: none; }
 a { color: #a6a6a6; text-decoration: none; transition: All 1s ease; -webkit-transition: All 1s ease; -moz-transition: All 1s ease; -ms-transition: All 1s ease; -o-transition: All 1s ease; }
-a:hover { color: #fff; }
+a:hover {
+	color: #F00;
+	font-size: 24px;
+}
 .blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
 /* -----------------------nav Ò»¼¶µ¼º½----------------- */
 header { width: 100%; background: #222; height: 70px; border-bottom: #464647 1px solid; }
@@ -125,3 +132,8 @@ footer { background: rgba(0, 0, 0, 0.44); -webkit-box-shadow: 0 -1px 0 rgba(0,0,
 .flickr ul li img:hover { opacity: 0.2 }
 .footer-bottom { background: rgba(0, 0, 0, 0.55); overflow: hidden; }
 .footer-bottom p { width: 1000px; margin: 0 auto; padding: 10px 0; }
+#mainbody .blogs #index_view ul h1 a strong {
+	color: #FF0000;
+}
+my {
+}

@@ -6,7 +6,12 @@ h2.t_nav a { padding: 10px; }
 h2.t_nav a:first-child { background: #247979; color: #fff; }
 h2.t_nav a:last-child { background: #59BCBC; color: #fff; }
 #index_view ul { padding: 0 30px 15px 30px; overflow:hidden }
-#index_view ul p { line-height: 24px; margin: 10px 0; text-indent: 2em }
+#index_view ul p {
+	line-height: 24px;
+	margin: 10px 0;
+	text-indent: 2em;
+	color: #000;
+}
 #index_view ul img {
 _width:expression((document.documentElement.clientWidth||document.body.clientWidth)<570?"570px":""); overflow: hidden; max-width: 570px; text-align: center; display: block; margin: auto; text-indent: 0em }
 .c_titile { text-align: center; font-size: 22px; margin: 20px 0; color: #000 }
@@ -26,4 +31,6 @@ _width:expression((document.documentElement.clientWidth||document.body.clientWid
 .otherlink ul { margin: 10px 0 }
 .otherlink li { line-height: 24px; height: 24px; float: left; margin-right: 20px; }
 .otherlink li a { color: #333; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 270px; display: block; }
-.otherlink li a:hover { color: #000; text-decoration: underline }
+.otherlink li a:hover { color: #000; text-decoration: underline }#mainbody .blogs #index_view ul .c_titile a strong {
+	color: #999999;
+}
