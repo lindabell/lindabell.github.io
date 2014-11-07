@@ -1,0 +1,1274 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>80eboy的博客</title>
+<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板" />
+<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板" />
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/view.css" rel="stylesheet">
+<!-- 返回顶部调用 begin -->
+<link href="css/lrtk.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<!-- 返回顶部调用 end-->
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/ad/ad.js"></script>
+</head>
+<body>
+<div id="mainbody">
+  <div class="blogs">
+    <div id="index_view">
+      <h1 class="c_titile">简单易用菜单框架</h1>
+      <p class="box">发布时间：2013-07-25<span>编辑：DanceSmile</span>阅读（30）</p>
+      <ul>
+        <p>相信很多攻城狮都用过128x64的液晶，想写好一点的ui好像不太可能或且花费很多时间，直接写吧，感觉好像很零碎，coding都怕了。下面介绍一个简单易用的菜单框架，你会发现它能做多层菜单而且结果清晰。</p>
+        <p>基本原理：</p>
+        <p><img src="images/menu_frame/page.png" alt=""></p>
+        <p>如上图液晶显示一屏我们定义为一个page，page中的项目定义为item；这样page就是item的容器了。当我们选中其中的一个item进去后是不是又是一个page呢，如下图。</p>
+        <p><img src="images/menu_frame/page2.png" alt=""></p>
+        <p>这样的话每一个item的下面都对应一个page，这样是不是就构成一个多层的菜单了。</p>
+        <p><img src="images/menu_frame/page3.png" alt=""></p>
+        <p>他们是什么关系呢？一个page中有item，那么用结构体就可以实现啦；item下面又有page，那么在item中加一个page的指针指向item对应的page页。前面都是从上到下的，那么怎么返回呢？观察发现返回就是子page返回父page，这样在page结构体中假如一项父page的指针不就ok了。具体实现请看源文件。</p>
+        <p>结构体定义</p>
+        <table>
+          <tbody>
+            <tr>
+              <td id="LC1">#ifndef _Menu_H_BAB</td>
+            </tr>
+            <tr>
+              <td id="L2" data-line-number="2"></td>
+              <td id="LC2">#define _Menu_H_BAB</td>
+            </tr>
+            <tr>
+              <td id="L3" data-line-number="3"></td>
+              <td id="LC3"></td>
+            </tr>
+            <tr>
+              <td id="L4" data-line-number="4"></td>
+              <td id="LC4">#include "stm32f10x.h"</td>
+            </tr>
+            <tr>
+              <td id="L5" data-line-number="5"></td>
+              <td id="LC5">#include "LCD.h"</td>
+            </tr>
+            <tr>
+              <td id="L6" data-line-number="6"></td>
+              <td id="LC6">#include "Key.h"</td>
+            </tr>
+            <tr>
+              <td id="L7" data-line-number="7"></td>
+              <td id="LC7"></td>
+            </tr>
+            <tr>
+              <td id="L8" data-line-number="8"></td>
+              <td id="LC8"></td>
+            </tr>
+            <tr>
+              <td id="L9" data-line-number="9"></td>
+              <td id="LC9">#define KEY_Special 	255	///&lt;这个保留用于特别事件</td>
+            </tr>
+            <tr>
+              <td id="L10" data-line-number="10"></td>
+              <td id="LC10"></td>
+            </tr>
+            <tr>
+              <td id="L11" data-line-number="11"></td>
+              <td id="LC11"></td>
+            </tr>
+            <tr>
+              <td id="L12" data-line-number="12"></td>
+              <td id="LC12">//菜单调试，在调试时最好定义，可以帮助发现问题；当发布时把其置为0可以加快速度</td>
+            </tr>
+            <tr>
+              <td id="L13" data-line-number="13"></td>
+              <td id="LC13">#define MENU_DEBUG 1</td>
+            </tr>
+            <tr>
+              <td id="L14" data-line-number="14"></td>
+              <td id="LC14"></td>
+            </tr>
+            <tr>
+              <td id="L15" data-line-number="15"></td>
+              <td id="LC15"></td>
+            </tr>
+            <tr>
+              <td id="L16" data-line-number="16"></td>
+              <td id="LC16"></td>
+            </tr>
+            <tr>
+              <td id="L17" data-line-number="17"></td>
+              <td id="LC17">void Menu_Show(void);</td>
+            </tr>
+            <tr>
+              <td id="L18" data-line-number="18"></td>
+              <td id="LC18"></td>
+            </tr>
+            <tr>
+              <td id="L19" data-line-number="19"></td>
+              <td id="LC19"></td>
+            </tr>
+            <tr>
+              <td id="L20" data-line-number="20"></td>
+              <td id="LC20"></td>
+            </tr>
+            <tr>
+              <td id="L21" data-line-number="21"></td>
+              <td id="LC21">struct PAGE</td>
+            </tr>
+            <tr>
+              <td id="L22" data-line-number="22"></td>
+              <td id="LC22">{</td>
+            </tr>
+            <tr>
+              <td id="L23" data-line-number="23"></td>
+              <td id="LC23"> const struct PAGE *pParent;</td>
+            </tr>
+            <tr>
+              <td id="L24" data-line-number="24"></td>
+              <td id="LC24"> void (*Function)(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L25" data-line-number="25"></td>
+              <td id="LC25"> const struct Item *pItem;</td>
+            </tr>
+            <tr>
+              <td id="L26" data-line-number="26"></td>
+              <td id="LC26"> const u8 ItemNum;</td>
+            </tr>
+            <tr>
+              <td id="L27" data-line-number="27"></td>
+              <td id="LC27">};</td>
+            </tr>
+            <tr>
+              <td id="L28" data-line-number="28"></td>
+              <td id="LC28">struct Item</td>
+            </tr>
+            <tr>
+              <td id="L29" data-line-number="29"></td>
+              <td id="LC29">{</td>
+            </tr>
+            <tr>
+              <td id="L30" data-line-number="30"></td>
+              <td id="LC30"> /**</td>
+            </tr>
+            <tr>
+              <td id="L31" data-line-number="31"></td>
+              <td id="LC31"> 高4位作为特殊用途（bit4=1表示列表显示否则两列显示），低4位用于标记Item的序号  \n</td>
+            </tr>
+            <tr>
+              <td id="L32" data-line-number="32"></td>
+              <td id="LC32"> 如果为列表模式时*pText的格式为：" xx.string",最前面保留一个空格用于个光标(&gt;)使用，xx.为两位序号不要"."一定要有，string是要显示的文字，最多能显示6个汉字  \n</td>
+            </tr>
+            <tr>
+              <td id="L33" data-line-number="33"></td>
+              <td id="LC33"> 如果是两列显示则pText，即为要显示的文本（最多2个汉字）</td>
+            </tr>
+            <tr>
+              <td id="L34" data-line-number="34"></td>
+              <td id="LC34"> */</td>
+            </tr>
+            <tr>
+              <td id="L35" data-line-number="35"></td>
+              <td id="LC35"> const u8 TypeAndIndex; </td>
+            </tr>
+            <tr>
+              <td id="L36" data-line-number="36"></td>
+              <td id="LC36"> const u8 *pText;</td>
+            </tr>
+            <tr>
+              <td id="L37" data-line-number="37"></td>
+              <td id="LC37"> const struct PAGE *pChildrenPage;</td>
+            </tr>
+            <tr>
+              <td id="L38" data-line-number="38"></td>
+              <td id="LC38">};</td>
+            </tr>
+            <tr>
+              <td id="L39" data-line-number="39"></td>
+              <td id="LC39"></td>
+            </tr>
+            <tr>
+              <td id="L40" data-line-number="40"></td>
+              <td id="LC40"></td>
+            </tr>
+            <tr>
+              <td id="L41" data-line-number="41"></td>
+              <td id="LC41">extern const struct PAGE *pPage;</td>
+            </tr>
+            <tr>
+              <td id="L42" data-line-number="42"></td>
+              <td id="LC42"></td>
+            </tr>
+            <tr>
+              <td id="L43" data-line-number="43"></td>
+              <td id="LC43">void SetMainPage(const struct PAGE *pMainPage);</td>
+            </tr>
+            <tr>
+              <td id="L44" data-line-number="44"></td>
+              <td id="LC44">void ShowMenu(const struct PAGE *pPage);</td>
+            </tr>
+            <tr>
+              <td id="L45" data-line-number="45"></td>
+              <td id="LC45">void ShowPage(const struct PAGE *pPage);</td>
+            </tr>
+            <tr>
+              <td id="L46" data-line-number="46"></td>
+              <td id="LC46">void ShowParentPage(void);</td>
+            </tr>
+            <tr>
+              <td id="L47" data-line-number="47"></td>
+              <td id="LC47">void ShowItemPage(void);</td>
+            </tr>
+            <tr>
+              <td id="L48" data-line-number="48"></td>
+              <td id="LC48">void SelPageItem(u8 ItemIndex);</td>
+            </tr>
+            <tr>
+              <td id="L49" data-line-number="49"></td>
+              <td id="LC49">u8 Menu_GetSelItem(void);</td>
+            </tr>
+            <tr>
+              <td id="L50" data-line-number="50"></td>
+              <td id="LC50"></td>
+            </tr>
+            <tr>
+              <td id="L51" data-line-number="51"></td>
+              <td id="LC51">void GetShowLst(u8 *pOutMin,u8 *pOutMax);</td>
+            </tr>
+            <tr>
+              <td id="L52" data-line-number="52"></td>
+              <td id="LC52"></td>
+            </tr>
+            <tr>
+              <td id="L53" data-line-number="53"></td>
+              <td id="LC53">void KeySelItem(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L54" data-line-number="54"></td>
+              <td id="LC54"></td>
+            </tr>
+            <tr>
+              <td id="L55" data-line-number="55"></td>
+              <td id="LC55">#endif </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>实现文件</p>
+        <table>
+          <tbody>
+            <tr>
+              <td id="LC56">#include "MenuAPP.h"</td>
+            </tr>
+            <tr>
+              <td id="L" data-line-number="2"></td>
+              <td id="LC57">#include "I2C_eeprom.h"</td>
+            </tr>
+            <tr>
+              <td id="L56" data-line-number="3"></td>
+              <td id="LC58"></td>
+            </tr>
+            <tr>
+              <td id="L57" data-line-number="4"></td>
+              <td id="LC59">void mainPageCallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L58" data-line-number="5"></td>
+              <td id="LC60">void mainPage_Item1_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L59" data-line-number="6"></td>
+              <td id="LC61"></td>
+            </tr>
+            <tr>
+              <td id="L60" data-line-number="7"></td>
+              <td id="LC62">extern const struct PAGE Version_Page;</td>
+            </tr>
+            <tr>
+              <td id="L61" data-line-number="8"></td>
+              <td id="LC63">void Version_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L62" data-line-number="9"></td>
+              <td id="LC64"></td>
+            </tr>
+            <tr>
+              <td id="L63" data-line-number="10"></td>
+              <td id="LC65">extern const struct PAGE Setting_Page;</td>
+            </tr>
+            <tr>
+              <td id="L64" data-line-number="11"></td>
+              <td id="LC66">void Setting_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L65" data-line-number="12"></td>
+              <td id="LC67"></td>
+            </tr>
+            <tr>
+              <td id="L66" data-line-number="13"></td>
+              <td id="LC68">extern const struct PAGE Time_Page;</td>
+            </tr>
+            <tr>
+              <td id="L67" data-line-number="14"></td>
+              <td id="LC69">void Time_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L68" data-line-number="15"></td>
+              <td id="LC70"></td>
+            </tr>
+            <tr>
+              <td id="L69" data-line-number="16"></td>
+              <td id="LC71">extern const struct PAGE SMS_Page;</td>
+            </tr>
+            <tr>
+              <td id="L70" data-line-number="17"></td>
+              <td id="LC72">void SMS_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L71" data-line-number="18"></td>
+              <td id="LC73"></td>
+            </tr>
+            <tr>
+              <td id="L72" data-line-number="19"></td>
+              <td id="LC74">extern const struct PAGE SMS_Text_Page;</td>
+            </tr>
+            <tr>
+              <td id="L73" data-line-number="20"></td>
+              <td id="LC75">void SMS_Text_CallBack(u8 key);</td>
+            </tr>
+            <tr>
+              <td id="L74" data-line-number="21"></td>
+              <td id="LC76"></td>
+            </tr>
+            <tr>
+              <td id="L75" data-line-number="22"></td>
+              <td id="LC77">/******************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L76" data-line-number="23"></td>
+              <td id="LC78">//主菜单</td>
+            </tr>
+            <tr>
+              <td id="L77" data-line-number="24"></td>
+              <td id="LC79">//定义Item项             //显示方式&amp;序号  项目的名字    项目指向的页(Page)</td>
+            </tr>
+            <tr>
+              <td id="L78" data-line-number="25"></td>
+              <td id="LC80">const struct Item main_item[]={	0x00,	"信息",			&amp;SMS_Page,</td>
+            </tr>
+            <tr>
+              <td id="L79" data-line-number="26"></td>
+              <td id="LC81"> 0x01,	"设置",			&amp;Setting_Page,</td>
+            </tr>
+            <tr>
+              <td id="L80" data-line-number="27"></td>
+              <td id="LC82"> 0x02,	"版本",			&amp;Version_Page,</td>
+            </tr>
+            <tr>
+              <td id="L81" data-line-number="28"></td>
+              <td id="LC83"> 0x03,	"时间",			&amp;Time_Page,</td>
+            </tr>
+            <tr>
+              <td id="L82" data-line-number="29"></td>
+              <td id="LC84"> 0x04,	"状态",			0,</td>
+            </tr>
+            <tr>
+              <td id="L83" data-line-number="30"></td>
+              <td id="LC85"> 0x05,	"报警",			0,</td>
+            </tr>
+            <tr>
+              <td id="L84" data-line-number="31"></td>
+              <td id="LC86"> 0x06,	"飞信",			0,</td>
+            </tr>
+            <tr>
+              <td id="L85" data-line-number="32"></td>
+              <td id="LC87"> 0x07,	"问答",			0</td>
+            </tr>
+            <tr>
+              <td id="L86" data-line-number="33"></td>
+              <td id="LC88">};</td>
+            </tr>
+            <tr>
+              <td id="L87" data-line-number="34"></td>
+              <td id="LC89">//定义一个Page		      父页 该页的回调函数	该页的项          项的个数 </td>
+            </tr>
+            <tr>
+              <td id="L88" data-line-number="35"></td>
+              <td id="LC90">const struct PAGE mainPage={0,mainPageCallBack,main_item,sizeof(main_item)/sizeof(struct Item)};</td>
+            </tr>
+            <tr>
+              <td id="L89" data-line-number="36"></td>
+              <td id="LC91">/*********************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L90" data-line-number="37"></td>
+              <td id="LC92"></td>
+            </tr>
+            <tr>
+              <td id="L91" data-line-number="38"></td>
+              <td id="LC93"></td>
+            </tr>
+            <tr>
+              <td id="L92" data-line-number="39"></td>
+              <td id="LC94">const struct PAGE Version_Page={&amp;mainPage,Version_CallBack,0,0};</td>
+            </tr>
+            <tr>
+              <td id="L93" data-line-number="40"></td>
+              <td id="LC95">/***************************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L94" data-line-number="41"></td>
+              <td id="LC96"></td>
+            </tr>
+            <tr>
+              <td id="L95" data-line-number="42"></td>
+              <td id="LC97">//定义Item项              //显示方式&amp;序号    项目的名字      项目指向的页(Page)</td>
+            </tr>
+            <tr>
+              <td id="L96" data-line-number="43"></td>
+              <td id="LC98">const struct Item Setting_item[]={	0x10,	" 00.设0",			0,</td>
+            </tr>
+            <tr>
+              <td id="L97" data-line-number="44"></td>
+              <td id="LC99"> 0x11,	" 01.设1",			0,</td>
+            </tr>
+            <tr>
+              <td id="L98" data-line-number="45"></td>
+              <td id="LC100"> 0x12,	" 02.设2",			0,</td>
+            </tr>
+            <tr>
+              <td id="L99" data-line-number="46"></td>
+              <td id="LC101"> 0x13,	" 03.设3",			0,</td>
+            </tr>
+            <tr>
+              <td id="L100" data-line-number="47"></td>
+              <td id="LC102"> 0x14,	" 04.设4",			0,</td>
+            </tr>
+            <tr>
+              <td id="L101" data-line-number="48"></td>
+              <td id="LC103"> 0x15,	" 05.设5",			0,</td>
+            </tr>
+            <tr>
+              <td id="L102" data-line-number="49"></td>
+              <td id="LC104"> 0x16,	" 06.设6 你好",		0,</td>
+            </tr>
+            <tr>
+              <td id="L103" data-line-number="50"></td>
+              <td id="LC105"> 0x17,	" 07.设7",			0,</td>
+            </tr>
+            <tr>
+              <td id="L104" data-line-number="51"></td>
+              <td id="LC106"> 0x18,	" 08.设8",			0,</td>
+            </tr>
+            <tr>
+              <td id="L105" data-line-number="52"></td>
+              <td id="LC107"> 0x19,	" 09.设9",			0,</td>
+            </tr>
+            <tr>
+              <td id="L106" data-line-number="53"></td>
+              <td id="LC108"> 0x1A,	" 10.设10",			0</td>
+            </tr>
+            <tr>
+              <td id="L107" data-line-number="54"></td>
+              <td id="LC109"> };</td>
+            </tr>
+            <tr>
+              <td id="L108" data-line-number="55"></td>
+              <td id="LC110">const struct PAGE Setting_Page={&amp;mainPage,Setting_CallBack,Setting_item,sizeof(Setting_item)/sizeof(struct Item)};</td>
+            </tr>
+            <tr>
+              <td id="L109" data-line-number="56"></td>
+              <td id="LC111">/***************************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L110" data-line-number="57"></td>
+              <td id="LC112"></td>
+            </tr>
+            <tr>
+              <td id="L111" data-line-number="58"></td>
+              <td id="LC113">const struct PAGE Time_Page={&amp;mainPage,Time_CallBack,0,0};</td>
+            </tr>
+            <tr>
+              <td id="L112" data-line-number="59"></td>
+              <td id="LC114"></td>
+            </tr>
+            <tr>
+              <td id="L113" data-line-number="60"></td>
+              <td id="LC115">/***************************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L114" data-line-number="61"></td>
+              <td id="LC116">//定义Item项              //显示方式&amp;序号    项目的名字      项目指向的页(Page)</td>
+            </tr>
+            <tr>
+              <td id="L115" data-line-number="62"></td>
+              <td id="LC117">const struct Item SMS_item[]={ </td>
+            </tr>
+            <tr>
+              <td id="L116" data-line-number="63"></td>
+              <td id="LC118"> 0x10,	" 00.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L117" data-line-number="64"></td>
+              <td id="LC119"> 0x11,	" 01.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L118" data-line-number="65"></td>
+              <td id="LC120"> 0x12,	" 02.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L119" data-line-number="66"></td>
+              <td id="LC121"> 0x13,	" 03.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L120" data-line-number="67"></td>
+              <td id="LC122"> 0x14,	" 04.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L121" data-line-number="68"></td>
+              <td id="LC123"> 0x15,	" 05.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L122" data-line-number="69"></td>
+              <td id="LC124"> 0x16,	" 06.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L123" data-line-number="70"></td>
+              <td id="LC125"> 0x17,	" 07.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L124" data-line-number="71"></td>
+              <td id="LC126"> 0x18,	" 08.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L125" data-line-number="72"></td>
+              <td id="LC127"> 0x19,	" 09.",			&amp;SMS_Text_Page,</td>
+            </tr>
+            <tr>
+              <td id="L126" data-line-number="73"></td>
+              <td id="LC128"> 0x1A,	" 10.",			&amp;SMS_Text_Page</td>
+            </tr>
+            <tr>
+              <td id="L127" data-line-number="74"></td>
+              <td id="LC129"> };</td>
+            </tr>
+            <tr>
+              <td id="L128" data-line-number="75"></td>
+              <td id="LC130"></td>
+            </tr>
+            <tr>
+              <td id="L129" data-line-number="76"></td>
+              <td id="LC131">const struct PAGE SMS_Page={&amp;mainPage,SMS_CallBack,SMS_item,sizeof(Setting_item)/sizeof(struct Item)};</td>
+            </tr>
+            <tr>
+              <td id="L130" data-line-number="77"></td>
+              <td id="LC132"></td>
+            </tr>
+            <tr>
+              <td id="L131" data-line-number="78"></td>
+              <td id="LC133">//请计算出有多少项</td>
+            </tr>
+            <tr>
+              <td id="L132" data-line-number="79"></td>
+              <td id="LC134">#define THE_NUM_OF_SMS_ITEM  11</td>
+            </tr>
+            <tr>
+              <td id="L133" data-line-number="80"></td>
+              <td id="LC135"></td>
+            </tr>
+            <tr>
+              <td id="L134" data-line-number="81"></td>
+              <td id="LC136"></td>
+            </tr>
+            <tr>
+              <td id="L135" data-line-number="82"></td>
+              <td id="LC137">#if (THE_NUM_OF_SMS_ITEM&gt;SMS_MAX)</td>
+            </tr>
+            <tr>
+              <td id="L136" data-line-number="83"></td>
+              <td id="LC138">#error "the number  of SMS item must not beyond than SMS EEPROM Item "</td>
+            </tr>
+            <tr>
+              <td id="L137" data-line-number="84"></td>
+              <td id="LC139">#endif</td>
+            </tr>
+            <tr>
+              <td id="L138" data-line-number="85"></td>
+              <td id="LC140">/***************************************************************************************************************/</td>
+            </tr>
+            <tr>
+              <td id="L139" data-line-number="86"></td>
+              <td id="LC141"></td>
+            </tr>
+            <tr>
+              <td id="L140" data-line-number="87"></td>
+              <td id="LC142">const struct PAGE SMS_Text_Page={&amp;SMS_Page,SMS_Text_CallBack,0,0};</td>
+            </tr>
+            <tr>
+              <td id="L141" data-line-number="88"></td>
+              <td id="LC143"></td>
+            </tr>
+            <tr>
+              <td id="L142" data-line-number="89"></td>
+              <td id="LC144">/**</td>
+            </tr>
+            <tr>
+              <td id="L143" data-line-number="90"></td>
+              <td id="LC145">主菜单回调函数，对这个页得处理全部放在回调函数里</td>
+            </tr>
+            <tr>
+              <td id="L144" data-line-number="91"></td>
+              <td id="LC146">@param key 按键代码</td>
+            </tr>
+            <tr>
+              <td id="L145" data-line-number="92"></td>
+              <td id="LC147">*/</td>
+            </tr>
+            <tr>
+              <td id="L146" data-line-number="93"></td>
+              <td id="LC148">void mainPageCallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L147" data-line-number="94"></td>
+              <td id="LC149">{</td>
+            </tr>
+            <tr>
+              <td id="L148" data-line-number="95"></td>
+              <td id="LC150"> switch (key)</td>
+            </tr>
+            <tr>
+              <td id="L149" data-line-number="96"></td>
+              <td id="LC151"> {</td>
+            </tr>
+            <tr>
+              <td id="L150" data-line-number="97"></td>
+              <td id="LC152"> case KEY_UP: </td>
+            </tr>
+            <tr>
+              <td id="L151" data-line-number="98"></td>
+              <td id="LC153"> case KEY_Down: </td>
+            </tr>
+            <tr>
+              <td id="L152" data-line-number="99"></td>
+              <td id="LC154"> case KEY_Left: </td>
+            </tr>
+            <tr>
+              <td id="L153" data-line-number="100"></td>
+              <td id="LC155"> case KEY_Right:</td>
+            </tr>
+            <tr>
+              <td id="L154" data-line-number="101"></td>
+              <td id="LC156"> KeySelItem(key);</td>
+            </tr>
+            <tr>
+              <td id="L155" data-line-number="102"></td>
+              <td id="LC157"> break;</td>
+            </tr>
+            <tr>
+              <td id="L156" data-line-number="103"></td>
+              <td id="LC158"></td>
+            </tr>
+            <tr>
+              <td id="L157" data-line-number="104"></td>
+              <td id="LC159"> case KEY_Return:///&lt;主菜单 对返回按键没有处理</td>
+            </tr>
+            <tr>
+              <td id="L158" data-line-number="105"></td>
+              <td id="LC160"> ShowPage(&amp;mainPage);</td>
+            </tr>
+            <tr>
+              <td id="L159" data-line-number="106"></td>
+              <td id="LC161"> break;</td>
+            </tr>
+            <tr>
+              <td id="L160" data-line-number="107"></td>
+              <td id="LC162"> case KEY_Ok:</td>
+            </tr>
+            <tr>
+              <td id="L161" data-line-number="108"></td>
+              <td id="LC163"> ShowItemPage();</td>
+            </tr>
+            <tr>
+              <td id="L162" data-line-number="109"></td>
+              <td id="LC164"> break;</td>
+            </tr>
+            <tr>
+              <td id="L163" data-line-number="110"></td>
+              <td id="LC165"> }</td>
+            </tr>
+            <tr>
+              <td id="L164" data-line-number="111"></td>
+              <td id="LC166">}</td>
+            </tr>
+            <tr>
+              <td id="L165" data-line-number="112"></td>
+              <td id="LC167"></td>
+            </tr>
+            <tr>
+              <td id="L166" data-line-number="113"></td>
+              <td id="LC168"></td>
+            </tr>
+            <tr>
+              <td id="L167" data-line-number="114"></td>
+              <td id="LC169">void Version_CallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L168" data-line-number="115"></td>
+              <td id="LC170">{</td>
+            </tr>
+            <tr>
+              <td id="L169" data-line-number="116"></td>
+              <td id="LC171"> LCD_Write_Str(0,0,"版本信息");</td>
+            </tr>
+            <tr>
+              <td id="L170" data-line-number="117"></td>
+              <td id="LC172"> LCD_Write_Str(1,0,"厂商：鲁东大学");</td>
+            </tr>
+            <tr>
+              <td id="L171" data-line-number="118"></td>
+              <td id="LC173"> LCD_Write_Str(2,0,"地址：烟台");</td>
+            </tr>
+            <tr>
+              <td id="L172" data-line-number="119"></td>
+              <td id="LC174"> LCD_Write_Str(3,0,"版本：V0.4");</td>
+            </tr>
+            <tr>
+              <td id="L173" data-line-number="120"></td>
+              <td id="LC175"> if (key==KEY_Return)</td>
+            </tr>
+            <tr>
+              <td id="L174" data-line-number="121"></td>
+              <td id="LC176"> {</td>
+            </tr>
+            <tr>
+              <td id="L175" data-line-number="122"></td>
+              <td id="LC177"> ShowParentPage();</td>
+            </tr>
+            <tr>
+              <td id="L176" data-line-number="123"></td>
+              <td id="LC178"> }</td>
+            </tr>
+            <tr>
+              <td id="L177" data-line-number="124"></td>
+              <td id="LC179">}</td>
+            </tr>
+            <tr>
+              <td id="L178" data-line-number="125"></td>
+              <td id="LC180"></td>
+            </tr>
+            <tr>
+              <td id="L179" data-line-number="126"></td>
+              <td id="LC181"></td>
+            </tr>
+            <tr>
+              <td id="L180" data-line-number="127"></td>
+              <td id="LC182">void Setting_CallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L181" data-line-number="128"></td>
+              <td id="LC183">{</td>
+            </tr>
+            <tr>
+              <td id="L182" data-line-number="129"></td>
+              <td id="LC184"> switch (key)</td>
+            </tr>
+            <tr>
+              <td id="L183" data-line-number="130"></td>
+              <td id="LC185"> {</td>
+            </tr>
+            <tr>
+              <td id="L184" data-line-number="131"></td>
+              <td id="LC186"> case KEY_UP: </td>
+            </tr>
+            <tr>
+              <td id="L185" data-line-number="132"></td>
+              <td id="LC187"> case KEY_Down: </td>
+            </tr>
+            <tr>
+              <td id="L186" data-line-number="133"></td>
+              <td id="LC188"> case KEY_Left: </td>
+            </tr>
+            <tr>
+              <td id="L187" data-line-number="134"></td>
+              <td id="LC189"> case KEY_Right:</td>
+            </tr>
+            <tr>
+              <td id="L188" data-line-number="135"></td>
+              <td id="LC190"> KeySelItem(key);</td>
+            </tr>
+            <tr>
+              <td id="L189" data-line-number="136"></td>
+              <td id="LC191"> break;</td>
+            </tr>
+            <tr>
+              <td id="L190" data-line-number="137"></td>
+              <td id="LC192"></td>
+            </tr>
+            <tr>
+              <td id="L191" data-line-number="138"></td>
+              <td id="LC193"> case KEY_Return:///&lt;主菜单 对返回按键没有处理</td>
+            </tr>
+            <tr>
+              <td id="L192" data-line-number="139"></td>
+              <td id="LC194"> ShowParentPage();</td>
+            </tr>
+            <tr>
+              <td id="L193" data-line-number="140"></td>
+              <td id="LC195"> break;</td>
+            </tr>
+            <tr>
+              <td id="L194" data-line-number="141"></td>
+              <td id="LC196"> case KEY_Ok:</td>
+            </tr>
+            <tr>
+              <td id="L195" data-line-number="142"></td>
+              <td id="LC197"> ShowItemPage();</td>
+            </tr>
+            <tr>
+              <td id="L196" data-line-number="143"></td>
+              <td id="LC198"> break;</td>
+            </tr>
+            <tr>
+              <td id="L197" data-line-number="144"></td>
+              <td id="LC199"> }</td>
+            </tr>
+            <tr>
+              <td id="L198" data-line-number="145"></td>
+              <td id="LC200">}</td>
+            </tr>
+            <tr>
+              <td id="L199" data-line-number="146"></td>
+              <td id="LC201"></td>
+            </tr>
+            <tr>
+              <td id="L200" data-line-number="147"></td>
+              <td id="LC202"></td>
+            </tr>
+            <tr>
+              <td id="L201" data-line-number="148"></td>
+              <td id="LC203">void Time_CallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L202" data-line-number="149"></td>
+              <td id="LC204">{</td>
+            </tr>
+            <tr>
+              <td id="L203" data-line-number="150"></td>
+              <td id="LC205"> LCD_Write_Str(0,0,"日期: 2012-7-5");</td>
+            </tr>
+            <tr>
+              <td id="L204" data-line-number="151"></td>
+              <td id="LC206"> LCD_Write_Str(1,0,"时间: 16:59");</td>
+            </tr>
+            <tr>
+              <td id="L205" data-line-number="152"></td>
+              <td id="LC207"> if (key==KEY_Return)</td>
+            </tr>
+            <tr>
+              <td id="L206" data-line-number="153"></td>
+              <td id="LC208"> {</td>
+            </tr>
+            <tr>
+              <td id="L207" data-line-number="154"></td>
+              <td id="LC209"> ShowParentPage();</td>
+            </tr>
+            <tr>
+              <td id="L208" data-line-number="155"></td>
+              <td id="LC210"> }</td>
+            </tr>
+            <tr>
+              <td id="L209" data-line-number="156"></td>
+              <td id="LC211">}</td>
+            </tr>
+            <tr>
+              <td id="L210" data-line-number="157"></td>
+              <td id="LC212"></td>
+            </tr>
+            <tr>
+              <td id="L211" data-line-number="158"></td>
+              <td id="LC213">void SMS_CallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L212" data-line-number="159"></td>
+              <td id="LC214">{</td>
+            </tr>
+            <tr>
+              <td id="L213" data-line-number="160"></td>
+              <td id="LC215"> u8 i,tempData[SMS_TITLE_MAX_LEN];</td>
+            </tr>
+            <tr>
+              <td id="L214" data-line-number="161"></td>
+              <td id="LC216"> u8 max,maxTemp;</td>
+            </tr>
+            <tr>
+              <td id="L215" data-line-number="162"></td>
+              <td id="LC217"> u8 min,minTemp;</td>
+            </tr>
+            <tr>
+              <td id="L216" data-line-number="163"></td>
+              <td id="LC218"> u8 SelIndex,SelIndexTemp;</td>
+            </tr>
+            <tr>
+              <td id="L217" data-line-number="164"></td>
+              <td id="LC219"></td>
+            </tr>
+            <tr>
+              <td id="L218" data-line-number="165"></td>
+              <td id="LC220"> SelIndexTemp=Menu_GetSelItem();	//获得当前选中的index</td>
+            </tr>
+            <tr>
+              <td id="L219" data-line-number="166"></td>
+              <td id="LC221"> GetShowLst(&amp;minTemp,&amp;maxTemp);		 //获取当前显示的范围</td>
+            </tr>
+            <tr>
+              <td id="L220" data-line-number="167"></td>
+              <td id="LC222"></td>
+            </tr>
+            <tr>
+              <td id="L221" data-line-number="168"></td>
+              <td id="LC223"> switch (key)</td>
+            </tr>
+            <tr>
+              <td id="L222" data-line-number="169"></td>
+              <td id="LC224"> {</td>
+            </tr>
+            <tr>
+              <td id="L223" data-line-number="170"></td>
+              <td id="LC225"> case KEY_UP: </td>
+            </tr>
+            <tr>
+              <td id="L224" data-line-number="171"></td>
+              <td id="LC226"> case KEY_Down: </td>
+            </tr>
+            <tr>
+              <td id="L225" data-line-number="172"></td>
+              <td id="LC227"> case KEY_Left: </td>
+            </tr>
+            <tr>
+              <td id="L226" data-line-number="173"></td>
+              <td id="LC228"> case KEY_Right:</td>
+            </tr>
+            <tr>
+              <td id="L227" data-line-number="174"></td>
+              <td id="LC229"> KeySelItem(key);</td>
+            </tr>
+            <tr>
+              <td id="L228" data-line-number="175"></td>
+              <td id="LC230"></td>
+            </tr>
+            <tr>
+              <td id="L229" data-line-number="176"></td>
+              <td id="LC231"> SelIndex=Menu_GetSelItem();	//获得当前选中的index</td>
+            </tr>
+            <tr>
+              <td id="L230" data-line-number="177"></td>
+              <td id="LC232"> GetShowLst(&amp;min,&amp;max);		 //获取当前显示的范围</td>
+            </tr>
+            <tr>
+              <td id="L231" data-line-number="178"></td>
+              <td id="LC233"> if (max==maxTemp) break;//则表示当前显示的列表没有发生变化</td>
+            </tr>
+            <tr>
+              <td id="L232" data-line-number="179"></td>
+              <td id="LC234"></td>
+            </tr>
+            <tr>
+              <td id="L233" data-line-number="180"></td>
+              <td id="LC235"> for (i=min;i&lt;=max;i++)</td>
+            </tr>
+            <tr>
+              <td id="L234" data-line-number="181"></td>
+              <td id="LC236"> {</td>
+            </tr>
+            <tr>
+              <td id="L235" data-line-number="182"></td>
+              <td id="LC237"> //读取SMS信息的title并显示</td>
+            </tr>
+            <tr>
+              <td id="L236" data-line-number="183"></td>
+              <td id="LC238"> SMS_Read_Title(i,tempData,SMS_TITLE_MAX_LEN);</td>
+            </tr>
+            <tr>
+              <td id="L237" data-line-number="184"></td>
+              <td id="LC239"> LCD_Write_Str(i-min,2,tempData);</td>
+            </tr>
+            <tr>
+              <td id="L238" data-line-number="185"></td>
+              <td id="LC240"> }</td>
+            </tr>
+            <tr>
+              <td id="L239" data-line-number="186"></td>
+              <td id="LC241"></td>
+            </tr>
+            <tr>
+              <td id="L240" data-line-number="187"></td>
+              <td id="LC242"> break;</td>
+            </tr>
+            <tr>
+              <td id="L241" data-line-number="188"></td>
+              <td id="LC243"></td>
+            </tr>
+            <tr>
+              <td id="L242" data-line-number="189"></td>
+              <td id="LC244"> case KEY_Return:///&lt;主菜单 对返回按键没有处理</td>
+            </tr>
+            <tr>
+              <td id="L243" data-line-number="190"></td>
+              <td id="LC245"> ShowParentPage();</td>
+            </tr>
+            <tr>
+              <td id="L244" data-line-number="191"></td>
+              <td id="LC246"> break;</td>
+            </tr>
+            <tr>
+              <td id="L245" data-line-number="192"></td>
+              <td id="LC247"> case KEY_Ok:</td>
+            </tr>
+            <tr>
+              <td id="L246" data-line-number="193"></td>
+              <td id="LC248"> ShowItemPage();</td>
+            </tr>
+            <tr>
+              <td id="L247" data-line-number="194"></td>
+              <td id="LC249"> break;</td>
+            </tr>
+            <tr>
+              <td id="L248" data-line-number="195"></td>
+              <td id="LC250"> case KEY_Special://第一次进来时显示标题</td>
+            </tr>
+            <tr>
+              <td id="L249" data-line-number="196"></td>
+              <td id="LC251"> for (i=0;i&lt;4;i++)</td>
+            </tr>
+            <tr>
+              <td id="L250" data-line-number="197"></td>
+              <td id="LC252"> {</td>
+            </tr>
+            <tr>
+              <td id="L251" data-line-number="198"></td>
+              <td id="LC253"> SMS_Read_Title(i,tempData,SMS_TITLE_MAX_LEN);</td>
+            </tr>
+            <tr>
+              <td id="L252" data-line-number="199"></td>
+              <td id="LC254"> LCD_Write_Str(i,2,tempData);</td>
+            </tr>
+            <tr>
+              <td id="L253" data-line-number="200"></td>
+              <td id="LC255"> }</td>
+            </tr>
+            <tr>
+              <td id="L254" data-line-number="201"></td>
+              <td id="LC256"></td>
+            </tr>
+            <tr>
+              <td id="L255" data-line-number="202"></td>
+              <td id="LC257"> break;</td>
+            </tr>
+            <tr>
+              <td id="L256" data-line-number="203"></td>
+              <td id="LC258"> }</td>
+            </tr>
+            <tr>
+              <td id="L257" data-line-number="204"></td>
+              <td id="LC259">}</td>
+            </tr>
+            <tr>
+              <td id="L258" data-line-number="205"></td>
+              <td id="LC260"></td>
+            </tr>
+            <tr>
+              <td id="L259" data-line-number="206"></td>
+              <td id="LC261">void SMS_Text_CallBack(u8 key)</td>
+            </tr>
+            <tr>
+              <td id="L260" data-line-number="207"></td>
+              <td id="LC262">{</td>
+            </tr>
+            <tr>
+              <td id="L261" data-line-number="208"></td>
+              <td id="LC263"> u8 SelItemIdex;</td>
+            </tr>
+            <tr>
+              <td id="L262" data-line-number="209"></td>
+              <td id="LC264"> u8 tempData[SMS_TEXT_MAX_LEN];</td>
+            </tr>
+            <tr>
+              <td id="L263" data-line-number="210"></td>
+              <td id="LC265"> u8 len;</td>
+            </tr>
+            <tr>
+              <td id="L264" data-line-number="211"></td>
+              <td id="LC266"> static u8 offset=0;</td>
+            </tr>
+            <tr>
+              <td id="L265" data-line-number="212"></td>
+              <td id="LC267"></td>
+            </tr>
+            <tr>
+              <td id="L266" data-line-number="213"></td>
+              <td id="LC268"> switch (key)</td>
+            </tr>
+            <tr>
+              <td id="L267" data-line-number="214"></td>
+              <td id="LC269"> {</td>
+            </tr>
+            <tr>
+              <td id="L268" data-line-number="215"></td>
+              <td id="LC270"> case KEY_Special: </td>
+            </tr>
+            <tr>
+              <td id="L269" data-line-number="216"></td>
+              <td id="LC271"> offset=0;</td>
+            </tr>
+            <tr>
+              <td id="L270" data-line-number="217"></td>
+              <td id="LC272"> SelItemIdex=Menu_GetSelItem(); </td>
+            </tr>
+            <tr>
+              <td id="L271" data-line-number="218"></td>
+              <td id="LC273"> SMS_Read_Text(SelItemIdex,offset,tempData,SMS_TEXT_MAX_LEN);  ///&lt;从EEPROM中读出信息文本</td>
+            </tr>
+            <tr>
+              <td id="L272" data-line-number="219"></td>
+              <td id="LC274"> offset+=LCD_Write_Screen(tempData);</td>
+            </tr>
+            <tr>
+              <td id="L273" data-line-number="220"></td>
+              <td id="LC275"> break;</td>
+            </tr>
+            <tr>
+              <td id="L274" data-line-number="221"></td>
+              <td id="LC276"> case KEY_Left:</td>
+            </tr>
+            <tr>
+              <td id="L275" data-line-number="222"></td>
+              <td id="LC277"> if(offset&lt;=64) break;  ///&lt;offset 少于等于64即当前是第一屏，按左键是没有意义的</td>
+            </tr>
+            <tr>
+              <td id="L276" data-line-number="223"></td>
+              <td id="LC278"></td>
+            </tr>
+            <tr>
+              <td id="L277" data-line-number="224"></td>
+              <td id="LC279"> offset=(offset/64-1)*64;</td>
+            </tr>
+            <tr>
+              <td id="L278" data-line-number="225"></td>
+              <td id="LC280"> SelItemIdex=Menu_GetSelItem(); </td>
+            </tr>
+            <tr>
+              <td id="L279" data-line-number="226"></td>
+              <td id="LC281"> SMS_Read_Text(SelItemIdex,offset,tempData,SMS_TEXT_MAX_LEN);  ///&lt;从EEPROM中读出信息文本</td>
+            </tr>
+            <tr>
+              <td id="L280" data-line-number="227"></td>
+              <td id="LC282"> offset+=LCD_Write_Screen(tempData);</td>
+            </tr>
+            <tr>
+              <td id="L281" data-line-number="228"></td>
+              <td id="LC283"> break;</td>
+            </tr>
+            <tr>
+              <td id="L282" data-line-number="229"></td>
+              <td id="LC284"> case KEY_Right:</td>
+            </tr>
+            <tr>
+              <td id="L283" data-line-number="230"></td>
+              <td id="LC285"> if (offset%64) break; ///&lt;假如offset不是64的整数说明当前液晶没有显示完，即没有数据了</td>
+            </tr>
+            <tr>
+              <td id="L284" data-line-number="231"></td>
+              <td id="LC286"> SelItemIdex=Menu_GetSelItem(); </td>
+            </tr>
+            <tr>
+              <td id="L285" data-line-number="232"></td>
+              <td id="LC287"> SMS_Read_Text(SelItemIdex,offset,tempData,SMS_TEXT_MAX_LEN);  ///&lt;从EEPROM中读出信息文本</td>
+            </tr>
+            <tr>
+              <td id="L286" data-line-number="233"></td>
+              <td id="LC288"> Lcd_Clr_Scr();</td>
+            </tr>
+            <tr>
+              <td id="L287" data-line-number="234"></td>
+              <td id="LC289"> offset+=LCD_Write_Screen(tempData);</td>
+            </tr>
+            <tr>
+              <td id="L288" data-line-number="235"></td>
+              <td id="LC290"> break;</td>
+            </tr>
+            <tr>
+              <td id="L289" data-line-number="236"></td>
+              <td id="LC291"> case KEY_Return:</td>
+            </tr>
+            <tr>
+              <td id="L290" data-line-number="237"></td>
+              <td id="LC292"> ShowParentPage();</td>
+            </tr>
+            <tr>
+              <td id="L291" data-line-number="238"></td>
+              <td id="LC293"> return;</td>
+            </tr>
+            <tr>
+              <td id="L292" data-line-number="239"></td>
+              <td id="LC294"> break;</td>
+            </tr>
+            <tr>
+              <td id="L293" data-line-number="240"></td>
+              <td id="LC295"></td>
+            </tr>
+            <tr>
+              <td id="L294" data-line-number="241"></td>
+              <td id="LC296"> }</td>
+            </tr>
+            <tr>
+              <td id="L295" data-line-number="242"></td>
+              <td id="LC297"></td>
+            </tr>
+            <tr>
+              <td id="L296" data-line-number="243"></td>
+              <td id="LC298"></td>
+            </tr>
+            <tr>
+              <td id="L297" data-line-number="244"></td>
+              <td id="LC299"></td>
+            </tr>
+            <tr>
+              <td id="L298" data-line-number="245"></td>
+              <td id="LC300">}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>源文件下载：</p>
+        <p><a href="images/menu_frame/Menu.h" target="_blank">Menu.h</a></p>
+        <p><a href="images/menu_frame/MenuAPP.h" target="_blank">MenuAPP.h</a></p>
+        <p><a href="images/menu_frame/MenuAPP.c" target="_blank">MenuAPP.c</a></p>
+      </ul>
+      <div class="share"> 
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+        <!-- Baidu Button END --> 
+      </div>
+    </div>
+    <!--bloglist end-->
+    <aside></aside>
+  </div>
+  <!--blogs end--> 
+</div>
+<!--mainbody end-->
+<footer>
+  <div class="footer-bottom">
+    <p>Copyright 2014 Design by <a href="http://www.80eboy.com/blog">80eboy</a></p>
+  </div>
+</footer>
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"><a id="gotop" href="javascript:void(0)"></a> </div>
+<!-- 代码结束 -->
+</body>
+</html>
