@@ -1,7 +1,7 @@
 document.write ("<DIV id=img1 style='Z-INDEX: 100; LEFT: 2px; WIDTH: 252px; POSITION: absolute; TOP: 43px; HEIGHT: 172px; ") 
 document.write (" visibility: visible;'> ") 
 document.write (" <a href='http://s.jb51.net' target='_blank'> ") 
-document.write (" <img src='www.80eboy.com/blog/images/FreeWifi/buy.png'style=border:none;/> ") 
+document.write (" <img src='http://www.80eboy.com/blog/images/FreeWiFi/buy.png'style=border:none;/> ") 
 document.write (" </a></DIV> ") 
 var xPos = 300; 
 var yPos = 200; 
