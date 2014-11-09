@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>80eboy的博客</title>
+<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板" />
+<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板" />
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/view.css" rel="stylesheet">
+<!-- 返回顶部调用 begin -->
+<link href="css/lrtk.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<!-- 返回顶部调用 end-->
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/ad/ad.js"></script>
+</head>
+<body>
+<div id="mainbody">
+  <div class="blogs">
+    <div id="index_view">
+      <h1 class="c_titile">FreeModbus 移植到Qt5</h1>
+      <p class="box">发布时间：2014-11-10<span>编辑：80eboy</span></p>
+      <p class="box">转载请保留出处:<a href="FreeModbus.html" target="_blank"><strong>http://www.80eboy.com/blog/FreeModbus</strong></a></p>
+      <ul>
+        <p> modbus在工业应用很广泛。我之前都是听说过而已，我并没有使用过，甚至都不了解是个怎么样的东东，就知道是一种比较使用的通信协议。modbus是应用层的协议与硬件部相关的，所以任何可以双向通信的链路都可以使用modbus的；想RS232协议、RS485协议、TCP协议等，但是目前好像没有使用在红外的、433、蓝牙等上，可能是不稳定吧。毕竟是工业用的，稳定第一。</p>
+        <p>废话不多说了，移植FreeModbus其实也不是很难，官方包中也用很多移植好的。</p>
+        <p>移植主要就是下面的3个文件，假如你不是在OS上使用的，其实不用管portevent.c文件的。</p>
+        <p>portevent.c</p>
+        <p>portserial.c</p>
+        <p>porttimer.c</p>
+        <p>移植第一步先去到demo文件夹找到BARE文件夹，这个文件夹下就是一套模板。</p>
+        <p>说白了就是移植符合你的板子的串口和一个定时器。</p>
+        <p>想想好像也没有什么好说的，汗！！</p>
+        <p>具体请下载代码去看，应该很容易看懂的。      </p>
+        <p>下载工程代码：<a href="images/FreeModbus/FreeModbusForQt5.rar" target="_blank">FreeModbusForQt5.rar</a></p>
+      </ul>
+      <div class="share"> 
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+        <!-- Baidu Button END --> 
+      </div>
+    </div>
+    <!--bloglist end-->
+    <aside></aside>
+  </div>
+  <!--blogs end--> 
+</div>
+<!--mainbody end-->
+<footer>
+  <div class="footer-bottom">
+    <p>Copyright 2014 Design by <a href="http://www.80eboy.com/blog">80eboy</a></p>
+  </div>
+</footer>
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"><a id="gotop" href="javascript:void(0)"></a> </div>
+<!-- 代码结束 -->
+</body>
+</html>
