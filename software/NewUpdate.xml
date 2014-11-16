@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<update>
+    <appName></appName>
+    <versionCode>123</versionCode>
+    <version>V0.8</version>
+    <date>20141116</date>
+    <MD5>salfjasl</MD5>
+    <note>
+    <p>1.优化ui界面</p>
+    <p>2.增加自动检测更新</p>
+    <p>3.增加xml文件解释</p>
+    <p>4.增加MD5</p>
+    </note>
+</update>
+
