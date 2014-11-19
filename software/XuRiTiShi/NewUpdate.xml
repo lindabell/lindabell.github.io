@@ -7,6 +7,10 @@
     <MD5>63302C2F3A7F0ADCF551CCD6DAB93A6D</MD5>
     <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi.apk</downLink>
     <note>
+	<p>1.增加专用文件夹用于保存数据</p>
+	<p>2.增加自动检查更新信息</p>
+	<p>3.增加在线更新功能</p>
+	<p>4.增加更新ui</p>
     </note>
 </update>
 
