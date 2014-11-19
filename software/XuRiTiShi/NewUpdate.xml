@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update>
-    <appName>XuRiTiShi_V2_0_0.apk</appName>
-    <versionCode>20000</versionCode>
-    <version>V2.0.0</version>
+    <appName>XuRiTiShi_V2_0_1.apk</appName>
+    <versionCode>20001</versionCode>
+    <version>V2.0.1</version>
     <date>20141119</date>
-    <MD5>E4EA5C865C951E4CF2390CF92269ADD1</MD5>
-	<fileSize>7775740</fileSize>
-    <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi_V2_0_0.apk</downLink>
+    <MD5>F8E45573492AF72E154A7F5578AFCC0B</MD5>
+        <fileSize>7776563</fileSize>
+    <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi_V2_0_1.apk</downLink>
     <note>
-	<p>1.增加专用文件夹用于保存数据</p>
-	<p>2.增加自动检查更新信息</p>
-	<p>3.增加在线更新功能</p>
-	<p>4.增加更新ui</p>
+        <p>1.增加MD5检测文件完整性</p>
     </note>
 </update>
-
