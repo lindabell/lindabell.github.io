@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update>
-    <appName>XuRiTiShi_V2_0_1.apk</appName>
-    <versionCode>20001</versionCode>
-    <version>V2.0.1</version>
+    <appName>XuRiTiShi_V2_0_2.apk</appName>
+    <versionCode>20002</versionCode>
+    <version>V2.0.2</version>
     <date>20141119</date>
-    <MD5>F8E45573492AF72E154A7F5578AFCC0B</MD5>
+    <MD5>AA373DE8864887710B1FDA22E1E04B13</MD5>
         <fileSize>7776563</fileSize>
-    <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi_V2_0_1.apk</downLink>
+    <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi_V2_0_2.apk</downLink>
     <note>
-        <p>1.增加MD5检测文件完整性</p>
+        <p>1.增加下载文件大小显示</p>
     </note>
 </update>
