@@ -1,0 +1,480 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>80eboy的博客</title>
+<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板" />
+<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板" />
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/view.css" rel="stylesheet">
+<!-- 返回顶部调用 begin -->
+<link href="css/lrtk.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
+<!-- 返回顶部调用 end-->
+<!--[if lt IE 9]>
+<script src="js/modernizr.js"></script>
+<![endif]-->
+<script type="text/javascript">
+(function(){
+var p = {
+url:location.href,
+showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+desc:'',/*默认分享理由(可选)*/
+summary:'',/*分享摘要(可选)*/
+title:'',/*分享标题(可选)*/
+site:'',/*分享来源 如：腾讯网(可选)*/
+pics:'', /*分享图片的路径(可选)*/
+style:'102',
+width:145,
+height:30
+};
+var s = [];
+for(var i in p){
+s.push(i + '=' + encodeURIComponent(p[i]||''));
+}
+document.write(['<a version="1.0" class="qzOpenerDiv" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank">分享</a>'].join(''));
+})();
+</script>
+<script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: larger;
+	font-weight: bold;
+}
+.STYLE2 {font-size: x-large}
+-->
+</style>
+</head>
+<body>
+
+<div id="mainbody">
+  <div class="blogs">
+    <div id="index_view">
+      <h1 class="c_titile">AT指令</h1>
+      <p class="box">发布时间：2015-06-22<span>原创：80eboy</span>转载请保留出处</p>
+      <ul>
+        <p>要使用GSM模块就必须要懂得AT指令，AT指令很直观；看到指令就很容易知道是干什么的。但是想用单片机控制却没有那么容易；因为他有多种状态返回的，写起来也很烦杂。2012年我就为这个烦恼，那事工作比较轻松花了一些时间设计了一个比较易用的函数用于发送和接收AT指令。前些天又用到AT指令，可是忘了我曾经写过这个函数了，有在重复劳动，哎呀，记忆力越来越差了。后来想起来了，移植到STM8非常好用，很容易就把相关的功能给写出来了。<br>
+        </p>
+        <p>特点：</p>
+        <p>1.具有超时功能</p>
+        <p>2.能够检查关心的AT指令，不关心的指令可以忽略掉</p>
+        <p>3.非阻塞编程</p>
+        <p>#include &quot;ATcmd.h&quot;<br>
+          #include &lt;stdarg.h&gt;<br>
+          #include &quot;gprs.h&quot;<br>
+          #include &quot;string.h&quot;<br>
+          #define RECEIVE_NODE_MAX    6<br>
+          static struct Node ReceiveNode[RECEIVE_NODE_MAX];<br>
+          static struct Node *pWriteNode;<br>
+        static struct Node *pReadNode;</p>
+        <p>u8 ATevent=NO_EVENT;<br>
+          u8 TimeOut=0;<br>
+          #define TIME_START  1<br>
+          #define TIME_STOP   2<br>
+          u8 timeState=TIME_STOP;<br>
+          void IO_write(u8 *pData,u8 len)<br>
+          {</p>
+        <p> //dialog-&gt;Serial-&gt;write((char *)pData,len);<br>
+          gprsSend((char *)pData,len);<br>
+          ATDebug(&quot;Send:%s&quot;,pData);<br>
+          }</p>
+        <p>void IO_write_str(u8 *str)<br>
+          {<br>
+          IO_write(str,strlen((char *)str));<br>
+          }</p>
+        <p>void time_OneS(void)<br>
+          {<br>
+          //ATDebug(&quot;time out\r\n&quot;);<br>
+          if(timeState==TIME_STOP) return;<br>
+          if(TimeOut!=0)TimeOut--;<br>
+          else<br>
+          {<br>
+          ATevent|=EVENT_TIME_OUT;    //time is up set The timeout event<br>
+          timeState=TIME_STOP;<br>
+          //ATDebug(&quot;time up\r\n&quot;);<br>
+          }<br>
+          }<br>
+          void setTimeOut(u8 _s)<br>
+          {<br>
+          ATevent&amp;=~EVENT_TIME_OUT;     //clear time out event<br>
+          TimeOut=_s;<br>
+          timeState=TIME_START;   //start timer<br>
+          }</p>
+        <p>/**<br>
+          * @brief IO_read The fuc will use in interrupt<br>
+          * @param DATA<br>
+          */<br>
+          void IO_read(u8 DATA)<br>
+          {<br>
+          static u16 cnt=0;</p>
+        <p> pWriteNode-&gt;buf[cnt++]=DATA;<br>
+          ATAssert(cnt&lt;NODE_MAX);<br>
+          if(DATA=='\n')  //the end of AT common<br>
+          {<br>
+          if(cnt&lt;=3)//receive \r\n filter it<br>
+          {<br>
+          cnt=0;<br>
+          //ATDebug(&quot;R:\\r\\n\r\n&quot;);<br>
+          return;<br>
+          }</p>
+        <p> pWriteNode-&gt;buf[cnt++]='\0';<br>
+          pWriteNode-&gt;size=cnt;<br>
+          ATevent|=EVENT_AT_FRAME;<br>
+          cnt=0;<br>
+          //ATDebug(&quot;R:%s&quot;,pWriteNode-&gt;buf);<br>
+          if(pWriteNode-&gt;next-&gt;size!=0)<br>
+          {<br>
+          //print warning to user<br>
+          ATDebug(&quot;no more node\r\n&quot;);<br>
+          }<br>
+          else<br>
+          {<br>
+          pWriteNode=pWriteNode-&gt;next;<br>
+          }<br>
+          }<br>
+          }</p>
+        <p>/**<br>
+          * @brief AT_init init AT common<br>
+          */<br>
+          void AT_init(void)<br>
+          {<br>
+          u8 i;<br>
+          //init buffer<br>
+          //connet buffer node to be link<br>
+          for(i=0;i&lt;(RECEIVE_NODE_MAX-1);i++)<br>
+          {<br>
+          ReceiveNode[i].next=&amp;ReceiveNode[i+1];<br>
+          ReceiveNode[i].size=0;<br>
+          ReceiveNode[i+1].size=0;<br>
+          }<br>
+          ReceiveNode[i].next=&amp;ReceiveNode[0];<br>
+          ReceiveNode[i].size=0;</p>
+        <p> //set head porter<br>
+          pWriteNode=pReadNode=&amp;ReceiveNode[0];</p>
+        <p> //init hardware<br>
+          GPRS_init();<br>
+          }</p>
+        <p>/**<br>
+          * @brief GetATFrame<br>
+          * @return if AT receive buffer not empty will return string pointer or return 0<br>
+          */<br>
+          static u8 tempBuf[NODE_MAX];<br>
+          u8 *GetATFrame(void)<br>
+          {<br>
+          u16 i;<br>
+          if(pReadNode-&gt;size)<br>
+          {<br>
+          for(i=0;i&lt;pReadNode-&gt;size;i++)<br>
+          {<br>
+          tempBuf[i]=pReadNode-&gt;buf[i];<br>
+          }<br>
+          //ATDebug(&quot;get:%s\r\n&quot;,pReadNode-&gt;buf);<br>
+          pReadNode-&gt;size=0;<br>
+          pReadNode=pReadNode-&gt;next;</p>
+        <p> return tempBuf;<br>
+          }<br>
+          return 0;<br>
+          }<br>
+          s8 ATFrameIsEmpty(void)<br>
+          {<br>
+          if(pReadNode-&gt;size==0) return 1;<br>
+          else return 0;<br>
+          }<br>
+        </p>
+        <p>/**<br>
+          * @brief StringCompare 两字符串在'\0'之前相同则认为这两个字符串一样的<br>
+          * @param Str1<br>
+          * @param Str2<br>
+          * @return<br>
+          */<br>
+          s8 StringCompare(u8 *Str1,u8 *Str2)<br>
+          {<br>
+          ATAssert(*Str1!=0);<br>
+          ATAssert(*Str2!=0);<br>
+          while(1)<br>
+          {<br>
+          if(*Str1!=*Str2)<br>
+          {<br>
+          if(*Str1=='\0'||*Str2=='\0') return 1;<br>
+          else return 0; //string diffient<br>
+          }</p>
+        <p> Str1++;<br>
+          Str2++;<br>
+          }<br>
+          }</p>
+        <p>/**<br>
+          * @brief extractStr    从字符串中提取特定字符串<br>
+          * @param pInStr        输出的字符串<br>
+          * @param startMark     开始标志<br>
+          * @param startMarkCnt  第几个标志<br>
+          * @param endMark       结束标志<br>
+          * @param endMarkCnt    第几个标志<br>
+          * @param pOutStr       输出字符串(从开始标志的下一个字符开始到结束标志的前一个字符，并在最后加‘\0’)<br>
+          * @return<br>
+          */<br>
+          u8 extractStr(u8 *pInStr,u8 startMark,u8 startMarkCnt,u8 endMark,u8 endMarkCnt,u8 *pOutStr)<br>
+          {<br>
+          u8 FindStartMark=false;<br>
+          u8 index=0;<br>
+          u8 Sindex=0;<br>
+          u8 Eindex=0;</p>
+        <p> //find string<br>
+          while(pInStr[index])<br>
+          {<br>
+          if((pInStr[index]==startMark)&amp;&amp;(FindStartMark==false))<br>
+          {<br>
+          Sindex++;   //count<br>
+          if(Sindex==startMarkCnt)<br>
+          {<br>
+          Sindex=index;   //save the start mark index<br>
+          FindStartMark=true;<br>
+          }<br>
+          }</p>
+        <p> if(pInStr[index]==endMark)<br>
+          {<br>
+          Eindex++;   //count<br>
+          if(Eindex==endMarkCnt)<br>
+          {<br>
+          Eindex=index;   //save the end mark index<br>
+          break;  //fund string<br>
+          }<br>
+          }</p>
+        <p> index++;<br>
+          }</p>
+        <p> //copy string<br>
+          ATAssert(FindStartMark==true);  //没有符合StartMark的字符或参数StartMark与endmark填写反了<br>
+          ATAssert(Sindex&lt;Eindex);    //<br>
+          for(Sindex+=1;Sindex&lt;Eindex;Sindex++)<br>
+          {<br>
+          *pOutStr++=pInStr[Sindex];<br>
+          }<br>
+          *pOutStr='\0';</p>
+        <p> return 1;<br>
+          }</p>
+        <p>void StrCopy(u8 *Dst,u8 *Src)<br>
+          {<br>
+          while(*Src)<br>
+          {<br>
+          *Dst++=*Src++;<br>
+          }<br>
+          *Dst='\0';<br>
+          }</p>
+        <p>#define WAITING_EVENT   (0)<br>
+          #define TIME_OUT        (-1)<br>
+          #define EMPTY           (-2)<br>
+          #define UNEXPECT_CMD    (-3)<br>
+          #define ERROR           (-4)<br>
+          /**<br>
+          * @brief ATcmd     send AT common 发送AT指令通用函数<br>
+          * @param cmd       AT common string or null(send nothing) AT指令(字符串)或空(不发送任何东西)<br>
+          * @param timeOut_s   time out  多少秒超时<br>
+          * @param cmd_num   The num of cmd which it exp 需要对比的命令(即&quot;...&quot;的参数个数)<br>
+          * @return  大于0时，表示收到和列表匹配的字符串<br>
+          *cmd   cmdLen<br>
+          *0     0       send nothing,wait exp       不发送任何东西，等待收到列表中的字符串<br>
+          *!=0   0       send cmd string,wait exp    发送字符串，等待收到列表中的字符串<br>
+          *!=0   !=0     send hex data,wait exp      发送十六进制数据，等待收到列表中的字符串<br>
+          *0     !=0     send nothing,wait exp       不发送任何东西，等待收到列表中的字符串<br>
+          */<br>
+          s8 ATcmd(u8 *cmd,u8 cmdLen,u8 timeOut_s,u8 *pOut,u8 cmd_num,...)<br>
+          {<br>
+          static u8 sate=0;<br>
+          s8 ret=WAITING_EVENT;<br>
+          u8 i;<br>
+          va_list vap;<br>
+          u8 *pStr1;<br>
+          u8 *pStr2;<br>
+          if(sate!=0) goto wait;</p>
+        <p> //send cmd<br>
+          if((cmd!=0)&amp;&amp;(cmdLen==0))IO_write_str((u8*)cmd);    //if cmd is string then cmdlen can be set to zro<br>
+          else if((cmd!=0)&amp;&amp;(cmdLen!=0))IO_write(cmd,cmdLen); //this is use to send hex data<br>
+          //if timeOut_s is zro will return TIME_OUT<br>
+          if(timeOut_s==0)<br>
+          {<br>
+          ret=TIME_OUT;<br>
+          return ret;     //@2015.6.18 时间设置为零时应该直接返回<br>
+          }<br>
+          else    setTimeOut(timeOut_s);<br>
+          sate=1;<br>
+          //set time out time<br>
+          //wait event<br>
+          wait:<br>
+          if((ATevent&amp;EVENT_AT_FRAME)||(ATevent&amp;EVENT_TIME_OUT))<br>
+          {<br>
+          if(ATevent&amp;EVENT_AT_FRAME)<br>
+          {<br>
+          ATevent&amp;=~EVENT_AT_FRAME;     //clear pending event<br>
+          va_start(vap , cmd_num);     //set the last one parameter<br>
+          //get AT common string from buffer<br>
+          pStr1=GetATFrame();<br>
+          for(i=0;i&lt;cmd_num;i++)<br>
+          {<br>
+          pStr2=va_arg(vap , u8*);  //get list's pointer<br>
+          ATAssert(pStr2!=0);<br>
+          if( StringCompare(pStr1,pStr2))<br>
+          {<br>
+          if(pOut)StrCopy(pOut,pStr1);//if pOut not zro copy The string out<br>
+          break;  //it is the same of list's string<br>
+          }<br>
+          }<br>
+          va_end(vap);    //set vap to zro<br>
+          if(i==cmd_num) ret=UNEXPECT_CMD; //the string is unkown<br>
+          else ret=i+1;<br>
+          }<br>
+          else<br>
+          {<br>
+          ATevent&amp;=~EVENT_TIME_OUT;     //clear time out event<br>
+          ret=TIME_OUT;<br>
+          }<br>
+          if((ret&gt;0)||(ret==TIME_OUT))sate=0; //rset the sate @2015.6.18增加超时后复位<br>
+          }<br>
+          if(!ATFrameIsEmpty()) ATevent|=EVENT_AT_FRAME; //if AT cmomon buffer is not empty set the event<br>
+          return ret;<br>
+          }</p>
+        <p>#ifdef DEBUG<br>
+          u8 HEAD[]=&quot;AABB&quot;;<br>
+          u8 buf[50];<br>
+          void AT_test(void)<br>
+          {<br>
+          //int len;<br>
+          u8 state=0xFF;<br>
+          s8 ret;</p>
+        <p> ATDebug(&quot;\r\nGPRS Starting\r\n&quot;);<br>
+          AT_init();</p>
+        <p> while(1)<br>
+          {<br>
+          switch(state)<br>
+          {<br>
+          case 0xFF:<br>
+          GPRS_RESET_PIN_LOW; //拉低GPRS复位引脚<br>
+          state=0;<br>
+          break;<br>
+          case 0://wait AT ready<br>
+          ret=ATcmd(0,0,1,0,1,&quot;^AT: ready\r&quot;);</p>
+        <p> if(ret==1)<br>
+          {<br>
+          GPRS_RESET_PIN_HIGH;//GPRS复位引脚拉高复位结束<br>
+          state=1;<br>
+          ATDebug(&quot;AT ready\r\n&quot;);<br>
+          //延时1s<br>
+          }<br>
+          else if(ret==TIME_OUT) ATDebug(&quot;time out&quot;);<br>
+          break;<br>
+          case 1://延时2s<br>
+          ret=ATcmd(0,0,2,0,1,&quot;delay2s\r&quot;);<br>
+          if(ret==TIME_OUT)<br>
+          {<br>
+          state=2;<br>
+          ATDebug(&quot;delay finish\r\n&quot;);</p>
+        <p> }<br>
+          break;<br>
+          case 2://check SIM<br>
+          ret=ATcmd((u8*)&quot;AT+ESIMS?\r\n&quot;,0,1,0,2,&quot;+ESIMS: 1\r&quot;,&quot;+ESIMS: 0\r&quot;);<br>
+          if(ret==1)<br>
+          {<br>
+          ATDebug(&quot;SIM ready\r\n&quot;);<br>
+          state=3;<br>
+          }<br>
+          else if(ret==2)<br>
+          {<br>
+          ATDebug(&quot;SIM Not ready\r\n&quot;);<br>
+          }</p>
+        <p> break;<br>
+          case 3://check network<br>
+          ret=ATcmd((u8*)&quot;AT+CREG?\r\n&quot;,0,1,0,5,&quot;+CREG: 0, 0\r&quot;,&quot;+CREG: 0, 1\r&quot;,&quot;+CREG: 0, 2\r&quot;,&quot;+CREG: 0, 3\r&quot;,&quot;+CREG: 0, 4\r&quot;);<br>
+          if(ret==2)<br>
+          {<br>
+          ATDebug(&quot;Net registed\r\n&quot;);<br>
+          state=4;<br>
+          }<br>
+          else if(ret==TIME_OUT) ATDebug(&quot;time out&quot;);<br>
+          break;<br>
+          case 4://connet to server<br>
+          ret=ATcmd((u8*)&quot;AT+CIPSTART=\&quot;TCP\&quot;,\&quot;80eboy.vicp.cc\&quot;,37379\r\n&quot;,0,10,0,3,&quot;+CIPSTART: CONNECTED\r&quot;,&quot;^CIPCLOSE: connect timeout.&quot;,&quot;+CIPSTART: FAILED&quot;);<br>
+          if(ret==1)<br>
+          {<br>
+          ATDebug(&quot;connect 80ebo.com\r\n&quot;);<br>
+          state=5;<br>
+          }<br>
+          else if((ret==2)||(ret==3))<br>
+          {<br>
+          ATDebug(&quot;connet fail\r\n&quot;);<br>
+          }<br>
+          else if(ret==TIME_OUT) ATDebug(&quot;time out&quot;);<br>
+          break;<br>
+          case 5://不断地检查网络是否断开<br>
+          ret=ATcmd(0,0,1,buf,3,&quot;^CIPCLOSE: DISCONNECTED\r&quot;,&quot;^CIPRECV:&quot;,HEAD);<br>
+          if(ret==1)<br>
+          {<br>
+          state=4;<br>
+          ATDebug(&quot;disconnect\r\nreconnect...\r\n&quot;);<br>
+          }<br>
+          else if(ret==2)<br>
+          {<br>
+          ATDebug(&quot;rev data\r\n&quot;);<br>
+          }<br>
+          else if(ret==3)<br>
+          {<br>
+          ATDebug(&quot;KOoooooooo\r\n&quot;);<br>
+          ATDebug(buf);<br>
+          state=6;<br>
+          }<br>
+          else if(ret==TIME_OUT) ATDebug(&quot;time out&quot;);<br>
+          break;<br>
+          case 6://send<br>
+          ret=ATcmd(&quot;AT+CIPSEND=12,hello server\r\n&quot;,0,5,0,2,&quot;OK\r&quot;,&quot;ERROR&quot;);<br>
+          if(ret==1)<br>
+          {<br>
+          ATDebug(&quot;send success\r\n&quot;);<br>
+          state=5;<br>
+          }<br>
+          else if(ret==2)<br>
+          {<br>
+          ATDebug(&quot;send fail\r\n&quot;);<br>
+          state=5;<br>
+          }<br>
+          else if(ret==TIME_OUT)<br>
+          {<br>
+          ATDebug(&quot;send time out\r\n&quot;);<br>
+          state=5;<br>
+          }<br>
+          break;<br>
+          }<br>
+          }<br>
+          }</p>
+        <p>#endif<br>
+        </p>
+        <p>&nbsp;</p>
+        <p>源文件下载</p>
+        <p class="STYLE1"><a href="images/AT/ATcmd.c" target="_blank" class="STYLE2">ATcmd.c</a></p>
+        <p class="STYLE2"><a href="images/AT/ATcmd.h" target="_blank"><strong>ATcmd.h</strong></a></p>
+      </ul>
+      <div class="share"> 
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+        <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6574585" ></script> 
+        <script type="text/javascript" id="bdshell_js"></script> 
+        <script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script> 
+        <!-- Baidu Button END --> 
+      </div>
+    </div>
+    <!--bloglist end-->
+    <aside></aside>
+  </div>
+  <!--blogs end--> 
+</div>
+<!--mainbody end-->
+<footer>
+  <div class="footer-bottom">
+    <p>Copyright 2015 Design by <a href="http://www.80eboy.com/blog">80eboy</a></p>
+  </div>
+</footer>
+<!-- jQuery仿腾讯回顶部和建议 代码开始 -->
+<div id="tbox"><a id="gotop" href="javascript:void(0)"></a> </div>
+<!-- 代码结束 -->
+</body>
+</html>
