@@ -1,20 +1,22 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>STM8 IAP</title>
-<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板" />
-<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板" />
+<!DOCTYPE html>
+<html><head>
+
+
+
+<meta charset="utf-8"><title>80eboy博客</title>
+
+<meta name="keywords" content="黑色模板,个人网站模板,个人博客模板,博客模板,css3,html5,网站模板">
+<meta name="description" content="这是一个有关黑色时间轴的css3 html5 网站模板">
 <link href="css/styles.css" rel="stylesheet">
-<link href="css/animation.css" rel="stylesheet">
-<!-- 返回顶部调用 begin -->
-<link href="css/lrtk.css" rel="stylesheet" />
+<link href="css/animation.css" rel="stylesheet"><!-- 返回顶部调用 begin -->
+
+<link href="css/lrtk.css" rel="stylesheet">
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/js.js"></script>
-<!-- 返回顶部调用 end-->
-<!--[if lt IE 9]>
+<script type="text/javascript" src="js/js.js"></script><!-- 返回顶部调用 end--><!--[if lt IE 9]>
 <script src="js/modernizr.js"></script>
 <![endif]-->
+
+
 <style type="text/css">
 <!--
 .STYLE3 {font-size: x-large}
@@ -55,26 +57,27 @@ mso-fareast-font-family:????;
 font-size:10.5000pt;
 mso-font-kerning:1.0000pt;
 }
+#mainbody .blogs .tuijian h2 big big {
+	color: #FF0000;
+}
 -->
-</style>
-</head>
-<body>
+</style></head><body>
 
 <div id="mainbody">
   <div class="info">
-    <figure> <img src="images/art.jpg"  alt=""></figure>
+    <figure> <img src="images/art.jpg" alt=""></figure>
     <div class="card">
-      <h1><img src="images/80eboy.png" width="85" height="79"></h1>
+      <h1><img src="images/80eboy.png" height="79" width="85"></h1>
       <p>网名：80eboy | 80后男孩</p>
       <p>职业：硬件工程师</p>
       <p>博客：<a href="http://www.80eboy.com/blog" target="_blank">www.80eboy.com/blog</a>      </p>
       <p>邮箱：80eboy@80eboy.com</p>
       <ul class="linkmore">
-        <li></li>
+        <li><br>
+</li>
       </ul>
     </div>
-  </div>
-  <!--info end-->
+  </div>&nbsp;<!--info end-->
   <div class="blank"></div>
   <div class="blogs">
     <ul class="bloglist">
@@ -84,22 +87,22 @@ mso-font-kerning:1.0000pt;
           <!--三角形-->
           <div class="ci"></div>
           <!--圆形-->
-          <h2 class="title"><span class="c_titile"><a href="stm8_iap/index.html" target="_blank"><span class="MsoNormal" style="text-align:center; "><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:22.0000pt; mso-font-kerning:1.0000pt; " >STM8 IAP</span><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " >
+          <h2 class="title"><span class="c_titile"><a href="stm8_iap/index.html" target="_blank"><span class="MsoNormal" style="text-align: center;"><span style="font-weight: bold; font-size: 22pt;">STM8 IAP</span><span style="font-size: 10.5pt;">
             <o:p></o:p>
           </span></span></a></span></h2>
           <ul class="textinfo">
-            <p><a href="stm8_iap/index.html" target="_blank"><img src="stm8_iap/video.gif" alt="99" width="178" height="145" border="0"></a></p>
-            <p align="center" class=MsoNormal2  style="text-align:left; " ><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:16.0000pt; mso-font-kerning:1.0000pt; " >描述：</span><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:16.0000pt; mso-font-kerning:1.0000pt; " >
+            <p><a href="stm8_iap/index.html" target="_blank"><img src="stm8_iap/video.gif" alt="99" border="0" height="145" width="178"></a></p>
+            <p class="MsoNormal2" style="text-align: left;" align="center"><span style="font-weight: bold; font-size: 16pt;">描述：</span><span style="font-weight: bold; font-size: 16pt;">
               <o:p></o:p>
             </span></p>
-            <p align="center" class=MsoNormal2  style="text-align:left; " ><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " > 一直想自己写一个bootloader，以前经常使用STM32和STC的单片机， STC单片机我没有IAP的，STM32比较复杂一直弄不懂怎么个启动流程的，导致一直耽搁着。
+            <p class="MsoNormal2" style="text-align: left;" align="center"><span style="font-size: 10.5pt;"> 一直想自己写一个bootloader，以前经常使用STM32和STC的单片机， STC单片机我没有IAP的，STM32比较复杂一直弄不懂怎么个启动流程的，导致一直耽搁着。
 最近工作需要用到STM8,很容易上手使得我工作提前完成了，但是下一步工作有没有到；这些天都在等硬件工程师画板打样。闲着很无聊，就翻翻STM8的手 册发现STM8可以IAP啊，于是又想谢谢看能写的出来吗？
 第一步：先看手册关于flash的分布，了解STM8的flash分布
 第二步：了解STM8的启动流程，这部分都找不到具体的，后来放狗找到了这一篇blog；让我彻底明白了STM8的启动流程了。
 第三步：怎样重定位中端向量，又是放狗，找到一个网友写的重定位程序，很简单。
 于是写了一个小程序，测试能够重定位中端向量
 第四步：修改APP的flash定义，编译
-第五步：合并hex下载到STM8中<font face="????" ></font></span><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " >
+第五步：合并hex下载到STM8中<font face="????"></font></span><span style="font-size: 10.5pt;">
               <o:p></o:p>
             </span></p>
             <p>&nbsp; </p>
@@ -116,12 +119,19 @@ mso-font-kerning:1.0000pt;
           <!--三角形-->
           <div class="ci"></div>
           <!--圆形-->
-          <h2 class="title"><span class="c_titile"><a href="世界最低功耗32位ARM.html" target="_blank"><span class="MsoNormal" style="text-align:center; "><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:22.0000pt; mso-font-kerning:1.0000pt; " >世界最低功耗32位ARM(视频)</span><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " >
+          <h2 class="title"><span class="c_titile"><a href="%E4%B8%96%E7%95%8C%E6%9C%80%E4%BD%8E%E5%8A%9F%E8%80%9732%E4%BD%8DARM.html" target="_blank"><span class="MsoNormal" style="text-align: center;"><span style="font-weight: bold; font-size: 22pt;">世界最低功耗32位ARM(视频)</span><span style="font-size: 10.5pt;">
             <o:p></o:p>
           </span></span></a></span></h2>
           <ul class="textinfo">
             <p><a href="two-component-usb-temperature-data-logger/index.html" target="_blank"></a></p>
-            <p class="STYLE4">这是世界上最低功耗的32位基於ARM Cortex-M0+的ARM处理器，针对可穿载应用(可支持基本触摸功能)和物联网的传感器网络，一枚电池可运作长达十年。这个全新的超低功耗 Atmel | SMART SAM L21 基於ARM Cortex-M0+ 内核MCU只耗用对手同类方案的3分1电量，及可以低於35uA/MHz水平操作活跃模式，保留32kB闪存并以900nA运行实时时钟。视频中Atmel高级产品经理Andreas Eieland演示以掌心体温透过Peltier Element驱动SAM L21，足以调整一个音频档案并以1MHz AM调幅传送至附近的无线电接收器。这展示出SAM L21的产品亮点 -支持在活跃模式的超低功耗，毋须限制闪存或SRAM大小，绝对适合IoT和其他需要嵌入式大容量存储器的电池驱动应用。</p>
+            <p class="STYLE4">这
+是世界上最低功耗的32位基於ARM
+Cortex-M0+的ARM处理器，针对可穿载应用(可支持基本触摸功能)和物联网的传感器网络，一枚电池可运作长达十年。这个全新的超低功耗
+Atmel | SMART SAM L21 基於ARM Cortex-M0+
+内核MCU只耗用对手同类方案的3分1电量，及可以低於35uA/MHz水平操作活跃模式，保留32kB闪存并以900nA运行实时时钟。视频中
+Atmel高级产品经理Andreas Eieland演示以掌心体温透过Peltier Element驱动SAM
+L21，足以调整一个音频档案并以1MHz AM调幅传送至附近的无线电接收器。这展示出SAM L21的产品亮点
+-支持在活跃模式的超低功耗，毋须限制闪存或SRAM大小，绝对适合IoT和其他需要嵌入式大容量存储器的电池驱动应用。</p>
             <p>&nbsp; </p>
             <p>&nbsp;</p>
           </ul>
@@ -136,15 +146,15 @@ mso-font-kerning:1.0000pt;
           <!--三角形-->
           <div class="ci"></div>
           <!--圆形-->
-          <h2 class="title"><span class="c_titile"><a href="two-component-usb-temperature-data-logger/index.html" target="_blank"><span class="MsoNormal" style="text-align:center; "><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:22.0000pt; mso-font-kerning:1.0000pt; " >只有两个器件的USB温度记录器</span><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " >
+          <h2 class="title"><span class="c_titile"><a href="two-component-usb-temperature-data-logger/index.html" target="_blank"><span class="MsoNormal" style="text-align: center;"><span style="font-weight: bold; font-size: 22pt;">只有两个器件的USB温度记录器</span><span style="font-size: 10.5pt;">
             <o:p></o:p>
           </span></span></a></span></h2>
           <ul class="textinfo">
-            <p><a href="two-component-usb-temperature-data-logger/index.html" target="_blank"><img src="two-component-usb-temperature-data-logger/pic/Two Component USB Temperature Data Logger939.png" alt="99" width="145" height="191" border="0"></a></p>
-            <p align="center" class=MsoNormal  style="text-align:left; " ><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:16.0000pt; mso-font-kerning:1.0000pt; " >描述：</span><span style="mso-spacerun:'yes'; font-family:????; font-weight:bold; font-size:16.0000pt; mso-font-kerning:1.0000pt; " >
+            <p><a href="two-component-usb-temperature-data-logger/index.html" target="_blank"><img src="two-component-usb-temperature-data-logger/pic/Two%20Component%20USB%20Temperature%20Data%20Logger939.png" alt="99" border="0" height="191" width="145"></a></p>
+            <p class="MsoNormal" style="text-align: left;" align="center"><span style="font-weight: bold; font-size: 16pt;">描述：</span><span style="font-weight: bold; font-size: 16pt;">
               <o:p></o:p>
             </span></p>
-            <p align="center" class=MsoNormal  style="text-align:left; " ><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " > 我创建这个项目是因为我想学习PIC单片机和USB协议。我也想知道我能把USB设备做到多小。我把器件减少到2个：一个PIC16F1455单片机和一个USB连接座。这个单片机作为一个USB串口，每秒以ASCII的方式发送温度数据出去。<font face="????" ></font></span><span style="mso-spacerun:'yes'; font-family:????; font-size:10.5000pt; mso-font-kerning:1.0000pt; " >
+            <p class="MsoNormal" style="text-align: left;" align="center"><span style="font-size: 10.5pt;"> 我创建这个项目是因为我想学习PIC单片机和USB协议。我也想知道我能把USB设备做到多小。我把器件减少到2个：一个PIC16F1455单片机和一个USB连接座。这个单片机作为一个USB串口，每秒以ASCII的方式发送温度数据出去。<font face="????"></font></span><span style="font-size: 10.5pt;">
               <o:p></o:p>
             </span></p>
             <p>&nbsp; </p>
@@ -161,9 +171,12 @@ mso-font-kerning:1.0000pt;
           <!--三角形-->
           <div class="ci"></div>
           <!--圆形-->
-          <h2 class="title STYLE3"><span class="c_titile"><a href="AT.html"><span class="c_titile"><a href="AT.html" target="_blank">AT指令编程</a></span></h2>
+          <h2 class="title STYLE3"><span class="c_titile"><a href="AT.html"><span class="c_titile"></span></a><a href="AT.html" target="_blank">AT指令编程</a></span></h2>
           <ul class="textinfo">
-            <p>要使用GSM模块就必须要懂得AT指令，AT指令很直观；看到指令就很容易知道是干什么的。但是想用单片机控制却没有那么容易；因为他有多种状态返回的，写起来也很烦杂。2012年我就为这个烦恼，那事工作比较轻松花了一些时间设计了一个比较易用的函数用于发送和接收AT指令。前些天又用到AT指令，可是忘了我曾经写过这个函数了，有在重复劳动，哎呀，记忆力越来越差了。后来想起来了，移植到STM8非常好用，很容易就把相关的功能给写出来了。<br>
+            <p>要
+使用GSM模块就必须要懂得AT指令，AT指令很直观；看到指令就很容易知道是干什么的。但是想用单片机控制却没有那么容易；因为他有多种状态返回的，写
+起来也很烦杂。2012年我就为这个烦恼，那事工作比较轻松花了一些时间设计了一个比较易用的函数用于发送和接收AT指令。前些天又用到AT指令，可是忘
+了我曾经写过这个函数了，有在重复劳动，哎呀，记忆力越来越差了。后来想起来了，移植到STM8非常好用，很容易就把相关的功能给写出来了。<br>
   </p>
             <p>特点：</p>
             <p>1.具有超时功能</p>
@@ -185,7 +198,7 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><span class="c_titile"><a href="weather.html" target="_blank">Qt5 视频教程(英文)</a></span></h2>
           <ul class="textinfo">
-            <p><img src="images/Qt.png" alt="" width="190" height="130">百度云盘：</p>
+            <p><img src="images/Qt.png" alt="" height="130" width="190">百度云盘：</p>
             <p><a href="http://pan.baidu.com/s/1sjmFaTB" target="_blank">http://pan.baidu.com/s/1sjmFaTB</a><a href="http://pan.baidu.com/s/1sjmFaTB" target="_blank"></a></p>
             <p>分析码：24mt</p>
             <p>&nbsp; </p>
@@ -204,7 +217,7 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><span class="c_titile"><a href="weather.html" target="_blank">天气查询软件</a></span></h2>
           <ul class="textinfo">
-            <p><img src="images/weather/V1.0.0.png" alt="" width="165" height="188">自己写的不怕有广告推送，(*^__^*) 嘻嘻……<br>
+            <p><img src="images/weather/V1.0.0.png" alt="" height="188" width="165">自己写的不怕有广告推送，(*^__^*) 嘻嘻……<br>
               天气信息是从百度服务器获取的。<br>
               获取天气信息并解析花了3个小时写代码<br>
               做ui花了4个小时多写代码<br>
@@ -226,7 +239,7 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><span class="c_titile"><a href="XuRiTiShi.html" target="_blank">圩日查询APP</a></span></h2>
           <ul class="textinfo">
-            <p><img src="images/XuRiTiShi/xu.png" alt="" width="202" height="232">目前可以查询“木格”、“平悦”、“木梓”、“桥圩”的圩日。</p>
+            <p><img src="images/XuRiTiShi/xu.png" alt="" height="232" width="202">目前可以查询“木格”、“平悦”、“木梓”、“桥圩”的圩日。</p>
             <p>&nbsp; </p>
             <p><a href="XuRiTiShi.html" target="_blank">文章详细...</a></p>
           </ul>
@@ -243,7 +256,10 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><span class="c_titile"><a href="FreeModbus.html" target="_blank">FreeModbus 移植到Qt5</a></span></h2>
           <ul class="textinfo">
-            <p>modbus在工业应用很广泛。我之前都是听说过而已，我并没有使用过，甚至都不了解是个怎么样的东东，就知道是一种比较使用的通信协议。modbus是应用层的协议与硬件部相关的，所以任何可以双向通信的链路都可以使用modbus的；想RS232协议、RS485协议、TCP协议等，但是目前好像没有使用在红外的、433、蓝牙等上，可能是不稳定吧。毕竟是工业用的，稳定第一。</p>
+            <p>modbus
+在工业应用很广泛。我之前都是听说过而已，我并没有使用过，甚至都不了解是个怎么样的东东，就知道是一种比较使用的通信协议。modbus是应用层的协议
+与硬件部相关的，所以任何可以双向通信的链路都可以使用modbus的；想RS232协议、RS485协议、TCP协议等，但是目前好像没有使用在红外
+的、433、蓝牙等上，可能是不稳定吧。毕竟是工业用的，稳定第一。</p>
             <p><a href="FreeModbus.html" target="_blank">文章详细...</a></p>
           </ul>
           <ul class="details">
@@ -259,7 +275,7 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><span class="c_titile"><a href="menu_frame.html" target="_blank">简单易用菜单框架</a></span></h2>
           <ul class="textinfo">
-            <a href="menu_frame.html" target="_blank"><img src="images/menu_frame/page3.png" alt="" width="249" height="166"></a>
+            <a href="menu_frame.html" target="_blank"><img src="images/menu_frame/page3.png" alt="" height="166" width="249"></a>
             <p>相信很多攻城狮都用过128x64的液晶，想写好一点的ui好像不太可能或且花费很多时间，直接写吧，感觉好像很零碎，coding都怕了。下面介绍一个简单易用的菜单框架，你会发现它能做多层菜单而且结果清晰。</p>
             <p><a href="menu_frame.html" target="_blank">文章详细...</a></p>
           </ul>
@@ -294,7 +310,10 @@ mso-font-kerning:1.0000pt;
           <!--圆形-->
           <h2 class="title"><a href="20141029.html" target="_blank">内心的改变——难</a></h2>
           <ul class="textinfo">
-            <p>人倒霉的时候就是很倒霉。到底是我真的天意要倒霉呢？不是的，是性格的问题。不同的性格会做不同的事情。就如今晚一样，遇到大事情的时候不知道做什么，生怕这样不行，生怕那样不行。结果把事情给搞砸了。这样的例子很多，入期中考试考得好，期末考试往往不好。小测验很好，大测验就不行了。一句话压力承受能力不行。就如下面这张图一样，我黑下去吗？做错能改，才是好；但是也不能过于苛求。</p>
+            <p>人
+倒霉的时候就是很倒霉。到底是我真的天意要倒霉呢？不是的，是性格的问题。不同的性格会做不同的事情。就如今晚一样，遇到大事情的时候不知道做什么，生怕
+这样不行，生怕那样不行。结果把事情给搞砸了。这样的例子很多，入期中考试考得好，期末考试往往不好。小测验很好，大测验就不行了。一句话压力承受能力不
+行。就如下面这张图一样，我黑下去吗？做错能改，才是好；但是也不能过于苛求。</p>
             <p>重新开始写博客，居然是写这类的东西。</p>
             <p><a href="FreeWifi.html" target="_blank"></a></p>
           </ul>
@@ -307,9 +326,37 @@ mso-font-kerning:1.0000pt;
         <!--arrow_box end-->
       </li>
     </ul>
+    <div class="tuijian">
+<div style="text-align: center;">
+      </div>
+<h2 style="font-weight: bold; text-align: center;"><big><big>ONet专题文章</big></big></h2>
+      <ol>
+        <li><span><strong>1</strong></span><a href="/blog/onet/1.html">ONet 开语篇</a></li>
+      </ol>
+      <p>&nbsp;</p>
+      <ol>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+</li>
+        <li><br>
+        </li>
+      </ol>
+    </div>
     <p>&nbsp;</p>
     <ul class="bloglist">
-      <li><!--arrow_box end--></li>
+      <li><!--arrow_box end--><br>
+</li>
     </ul>
     <!--bloglist end-->
     <aside></aside>
@@ -318,10 +365,10 @@ mso-font-kerning:1.0000pt;
 </div>
 <!--mainbody end-->
 <footer>
-  <div class="footer-bottom">
+  </footer><div class="footer-bottom">
     <p>Copyright 2014 Design by <a href="http://www.80eboy.com/blog">80eboy</a></p>
   </div>
-</footer>
+
 <!-- jQuery仿腾讯回顶部和建议 代码开始 -->
 <div id="tbox"> <a id="togbook" href="/e/tool/gbook/?bid=1"></a> <a id="gotop" href="javascript:void(0)"></a> </div>
 <!-- 代码结束 -->
@@ -331,5 +378,4 @@ mso-font-kerning:1.0000pt;
 <!-- 百度统计js -->
 <script type="text/javascript" src="http://www.80eboy.com/common/js/baidutongji.js"></script>
 
-</body>
-</html>
+</body></html>
