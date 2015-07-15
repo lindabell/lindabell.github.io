@@ -1,0 +1,673 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=UTF8" http-equiv="content-type">
+  <title>SmartDevicesProtocol</title>
+
+  
+</head><body>
+<p class="MsoNormal" style="vertical-align: middle; text-align: center; margin-left: 40px;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: bold; font-style: normal; font-size: 18pt;">智
+能设备通信协议(Smart&nbsp;Devices&nbsp;Protocol)</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: bold; font-style: normal; font-size: 22pt; vertical-align: sub;"><o:p></o:p></span></p>
+
+<table class="MsoTableGrid" style="border-collapse: collapse; width: 534.1pt; margin-left: 40px;">
+
+  <tbody>
+    <tr>
+      <td style="border: 0.5pt solid windowtext; padding: 0pt 5.4pt; width: 178pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">日
+期</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 178.05pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">备
+注</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 178.05pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">修
+改人</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 178pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">2015.7.14</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 178.05pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">初
+版</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 178.05pt;" valign="top" width="237">
+      <p class="MsoNormal" style="text-align: left; vertical-align: middle;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">80eboy</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="MsoNormal" style="vertical-align: middle; text-align: left; margin-left: 40px;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt; vertical-align: sub;"><o:p>&nbsp;</o:p></span></p>
+
+<p class="MsoNormal" style="vertical-align: middle; text-align: left; margin-left: 40px;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">本
+协议是一对多协议，即一台服务器对应多台终端；协议规定了基本帧格式，还定义了一些常用命令。</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="vertical-align: middle; text-align: left; margin-left: 40px;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;">协
+议中保留了部分命令和设备类型，协议中也给出了标准设备的具体通信协议。如果用户的设备时协议中的标准设备，那么应该使用标准设备给出的协议。</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: normal; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="vertical-align: middle; text-align: justify; margin-left: 40px;"><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: bold; font-style: normal; font-size: 12pt;">协
+议格式：</span><span style="font-family: 宋体; color: rgb(0, 0, 0); font-weight: bold; font-style: normal; font-size: 12pt;"><o:p></o:p></span></p>
+
+<table class="MsoTableGrid" style="border-collapse: collapse; width: 534.1pt; margin-left: 40px;">
+
+  <tbody>
+    <tr>
+      <td style="border: 0.5pt solid windowtext; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">名称<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">帧头</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">长度</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设备类型</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设备<font face="Times New Roman">ID</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">命令</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.8pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">数据</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.8pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">校验</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">字节数<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">1</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">1</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">1</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">2</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.75pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">1</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.8pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">n</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 66.8pt;" valign="top" width="89">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">1</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">帧头<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">固定为<font face="Times New Roman">0X55</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">长度<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">表示长度以后的字节数，包括设备类型、设备<font face="Times New Roman">ID</font><font face="宋体">、命令、数据、检验的总字节数</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">设备类型<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">表示设备的类型</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">设备<font face="Times New Roman">ID:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">表示本设备的<font face="Times New Roman">ID</font><font face="宋体">编号</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">命令<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;">D7<font face="宋体">位为</font><font face="Times New Roman">1</font><font face="宋体">时是服务器命令，</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-size: 10.5pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;">为<font face="Times New Roman">0</font><font face="宋体">时是终端设备命令</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">数据<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">校验<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">是没有转义之前，从帧头到数据的最后一个字节的异或值</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">转义<font face="Times New Roman">:</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">整帧数据把校验值计数好并填入到相应位置，再进行转义<font face="Times New Roman">(</font><font face="宋体">帧头不用转义</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xAA<font face="宋体">：</font></span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">0xAA&nbsp;0x01</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x55:</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;">0xAA&nbsp;0x02</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">设备类型</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">:(0x00~0x7F<font face="宋体">保留给协议，</font><font face="Times New Roman">0x80~0xFF</font><font face="宋体">给用户自定义</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">协议保留命令范围</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">终
+端<font face="Times New Roman">:&nbsp;&nbsp;&nbsp;0x00~0x1F&nbsp;(</font><font face="宋体">共</font><font face="Times New Roman">32</font><font face="宋体">个
+命令</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">服
+务器<font face="Times New Roman">:&nbsp;0x80~0x9F(</font><font face="宋体">共</font><font face="Times New Roman">32</font><font face="宋体">个命令</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">用户自定义命令范
+围</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">终
+端<font face="Times New Roman">:&nbsp;&nbsp;&nbsp;0x20~0x7F&nbsp;(</font><font face="宋体">共</font><font face="Times New Roman">95</font><font face="宋体">个
+命令</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">服
+务器<font face="Times New Roman">:&nbsp;0xA0~0xFF(</font><font face="宋体">共</font><font face="Times New Roman">95</font><font face="宋体">个命令</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">通
+用</span><span style="font-family: 宋体; font-size: 10.5pt;">命令</span><span style="font-family: 宋体; font-size: 10.5pt;">(<font face="宋体">协议保留命令</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;">:</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x00</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">：</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">终
+端设备</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">通
+用应答</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">命
+令</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">1<font face="宋体">字节数据</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">数
+据定义：</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x00:<font face="宋体">正确</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x01:<font face="宋体">错误</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x02:<font face="宋体">命令无效</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x03:<font face="宋体">超时</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">8</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">：</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">服
+务器</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">通
+用应答</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">命
+令</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">1<font face="宋体">字节数据</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">数
+据定义：</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x00:<font face="宋体">正确</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x01:<font face="宋体">错误</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x02:<font face="宋体">命令无效</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0x03:<font face="宋体">超时</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x01</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">终
+端</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">鉴
+权</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">命
+令<font face="Times New Roman">(1</font><font face="宋体">字节</font><font face="Times New Roman">)+</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">鉴
+权码</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">(n<font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">8</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">1</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">服
+务器</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">鉴
+权</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">命
+令<font face="Times New Roman">(1</font><font face="宋体">字节</font><font face="Times New Roman">)+</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">鉴
+权码</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">(n<font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">终
+端命令：</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x00<font face="宋体">：鉴权请求</font><font face="Times New Roman">+</font><font face="宋体">鉴权码</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x01<font face="宋体">：鉴权成功&nbsp;（无鉴权码）</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x02<font face="宋体">：鉴权失败&nbsp;（无鉴权码）</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x03<font face="宋体">：拒绝鉴权&nbsp;&nbsp;</font><font face="Times New Roman">(</font><font face="宋体">无鉴权码</font><font face="Times New Roman">)&nbsp;&nbsp;(</font><font face="宋体">由于多次鉴权失败，为了防止被破解鉴权协议</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">服
+务器命令：</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x00<font face="宋体">：鉴权</font><font face="Times New Roman">+</font><font face="宋体">鉴权码</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x04<font face="宋体">：请求鉴权&nbsp;</font><font face="Times New Roman">(</font><font face="宋体">无鉴权码</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">作用：用于鉴
+别服务器是否安全</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">说明：终端发
+送鉴权码到服务器，服务器应该根据终端鉴权码生产另一个鉴权码返回给终端，终端判断鉴权码是否符合加密要求来决定是否受这个服务器控制。</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">1<font face="宋体">）终端发起鉴权</font></span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端发送：<font face="Times New Roman">0x00+</font><font face="宋体">鉴权码</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">服务器回复：<font face="Times New Roman">0x00+</font><font face="宋体">鉴权码</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端检查鉴权
+码后回复：<font face="Times New Roman">0x01</font><font face="宋体">（鉴权成功）或</font><font face="Times New Roman">0x02</font><font face="宋体">（鉴权失败）</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">2<font face="宋体">）服务器发起鉴权</font></span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">服务器发送：<font face="Times New Roman">0x04</font><font face="宋体">（请求鉴权）</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端收到后发
+送：<font face="Times New Roman">0x00+</font><font face="宋体">鉴权码&nbsp;或
+&nbsp;</font><font face="Times New Roman">0x03</font><font face="宋体">（拒绝
+鉴权）</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">服务器收到终
+端鉴权码后发送：<font face="Times New Roman">0x00+</font><font face="宋体">鉴权码</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端检查鉴权
+码后回复：<font face="Times New Roman">0x01</font><font face="宋体">（鉴权成功）或</font><font face="Times New Roman">0x02</font><font face="宋体">（鉴权失败）</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x82</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">请
+求设备信息&nbsp;无数据</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x02</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">设
+备信息</span><span style="font-family: 宋体; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设
+备类型<font face="Times New Roman">(1</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">设备</font><font face="Times New Roman">ID(2</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">硬件版本</font><font face="Times New Roman">YYXX(2</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">软件版本</font><font face="Times New Roman">YYXX(2</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">生产商字符串</font><font face="Times New Roman">(n</font><font face="宋体">字节</font><font face="Times New Roman">)"</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">例：服务器：</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">55</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">05</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">XX</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">XX&nbsp;&nbsp;XX</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">82</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">CRC</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端：
+&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">55</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">11</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">A0</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">00&nbsp;01</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">02</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">A0&nbsp;</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">00&nbsp;01&nbsp;</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">01&nbsp;23</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">01&nbsp;56</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">73&nbsp;61&nbsp;69&nbsp;79&nbsp;69</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; text-decoration: underline; font-size: 10.5pt;">58</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">说明：</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">服务器：<font face="Times New Roman">XX</font><font face="宋体">表示任意值</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">终端：<font face="Times New Roman">11</font><font face="宋体">表示有</font><font face="Times New Roman">17</font><font face="宋体">个字节</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A0<font face="宋体">表示设备类型</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;0001<font face="宋体">表示设备</font><font face="Times New Roman">ID</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;02<font face="宋体">表示设备信息命令</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"> </span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;A0<font face="宋体">表示设备类型</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;0001<font face="宋体">表示设备</font><font face="Times New Roman">ID</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;0123<font face="宋体">表示硬件版本是</font><font face="Times New Roman">V01.23</font><font face="宋体">版本</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;0156<font face="宋体">表示软件版本是</font><font face="Times New Roman">V01.56</font><font face="宋体">版本</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="text-indent: 21pt; margin-left: 40px;"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">73&nbsp;61&nbsp;69&nbsp;79&nbsp;69</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">表示生产公司
+是<font face="Times New Roman">saiyi</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;58<font face="宋体">是校验码</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x83&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">心
+跳信号</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">无</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">数
+据</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x03</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">心
+跳信号</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">无</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">数
+据</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">作用：维持长
+连接</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x84</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">开
+机</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">无
+数据</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">终
+端返回通用应答</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x85</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">关
+机</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">无
+数据</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">终
+端返回通用应答</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x86</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">设
+备升级&nbsp;&nbsp;&nbsp;总包大小<font face="Times New Roman">(2</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">序号</font><font face="Times New Roman">(2</font><font face="宋体">字节</font><font face="Times New Roman">)+</font><font face="宋体">当前包大小</font><font face="Times New Roman">(1</font><font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">0x06</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">设
+备升级状态</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">
+</span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;">数
+据<font face="Times New Roman">1</font><font face="宋体">字节</font></span><span style="font-family: 宋体; color: rgb(255, 0, 0); font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-left: 134.76pt; text-indent: 21pt;"><span style="font-family: 宋体; font-size: 10.5pt;">0x00<font face="宋体">：等待升级数据</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-left: 134.76pt; text-indent: 21pt;"><span style="font-family: 宋体; font-size: 10.5pt;">0x01<font face="宋体">：升级完成</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-left: 134.76pt; text-indent: 21pt;"><span style="font-family: 宋体; font-size: 10.5pt;">0x02<font face="宋体">：升级失败</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-left: 134.76pt; text-indent: 21pt;"><span style="font-family: 宋体; font-size: 10.5pt;">0x03<font face="宋体">：检验码错误</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-left: 134.76pt; text-indent: 21pt;"><span style="font-family: 宋体; font-size: 10.5pt;">0x04<font face="宋体">：不支持升级</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">注：
+第<font face="Times New Roman">0</font><font face="宋体">包应该发送升级数据的</font><font face="Times New Roman">MD5</font><font face="宋体">码</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">标准设备列表：</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<table style="border-collapse: collapse; width: 707px; height: 157px; margin-left: 40px;" class="MsoTableGrid">
+
+  <tbody>
+    <tr>
+      <td style="border: 0.5pt solid windowtext; padding: 0pt 5.4pt; width: 68pt;" valign="top" width="90">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设备类型</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 58.15pt;" valign="top" width="77">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设备名称</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.75pt;" valign="top" width="205">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">命令</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 158.1pt;" valign="top" width="210">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">数据结构</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 92.6pt;" valign="top" width="123">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">应答数据结构</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 68pt;" valign="top" width="90">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA0</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 58.15pt;" valign="top" width="77">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">灯光类</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.75pt;" valign="top" width="205">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA0&nbsp;<font face="宋体">设
+置亮度</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 158.1pt;" valign="top" width="210">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">R(1<font face="宋体">字节</font><font face="Times New Roman">)+G(1</font><font face="宋体">字节</font><font face="Times New Roman">)+B(1</font><font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 92.6pt;" valign="top" width="123">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 68pt;" valign="top" width="90">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">待添加。。。</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 58.15pt;" valign="top" width="77">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.75pt;" valign="top" width="205">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 158.1pt;" valign="top" width="210">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 92.6pt;" valign="top" width="123">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 202px; width: 893px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">非标准设备：</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+
+<table class="MsoTableGrid" style="border-collapse: collapse; width: 530.6pt; margin-left: 40px;">
+
+  <tbody>
+    <tr>
+      <td style="border: 0.5pt solid windowtext; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">设备类型</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">设备名称</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">命令</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">数据结构</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 65.55pt;" valign="top" width="87">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">应答命令</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 87.65pt;" valign="top" width="116">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">应答数据结构</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;">0x80</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">空气净化器</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA0&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">负离子开</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">无</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA1&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">负离子关</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">无</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA2&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设置风机档位</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">档位值<font face="Times New Roman">(1</font><font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA3&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">指定时间关机</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">HHMMSS(2<font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">如：<font face="Times New Roman">0x13&nbsp;0x41&nbsp;0x32&nbsp;</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">&nbsp;&nbsp;
+&nbsp;&nbsp;表示<font face="Times New Roman">13:41:32</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA4&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">定时</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">时间值<font face="Times New Roman">(</font><font face="宋体">单位小时</font><font face="Times New Roman">)(1</font><font face="宋体">字节</font><font face="Times New Roman">)</font></span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p style="margin-left: 0px; width: 549px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA5</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">设置自动模式</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">无</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA6&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">滤网清洗开</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">无</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">0xA7&nbsp;</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">滤网清洗关</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">无</span><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td colspan="2" style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 153.2pt;" valign="top" width="204">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;">通用应答</span><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="border-style: none solid solid; border-color: -moz-use-text-color windowtext windowtext; border-width: medium 0.5pt 0.5pt; padding: 0pt 5.4pt; width: 88.65pt;" valign="top" width="118">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 64.35pt;" valign="top" width="85">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 76.9pt;" valign="top" width="102">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;">待添加。。。</span><span style="font-family: 宋体; font-size: 10.5pt;"><o:p></o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 147.5pt;" valign="top" width="196">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: none solid solid none; border-color: -moz-use-text-color windowtext windowtext -moz-use-text-color; border-width: medium 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 65.55pt;" valign="top" width="87">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: normal; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+      <td style="border-style: solid solid solid none; border-color: windowtext windowtext windowtext -moz-use-text-color; border-width: 0.5pt 0.5pt 0.5pt medium; padding: 0pt 5.4pt; width: 87.65pt;" valign="top" width="116">
+      <p class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-weight: bold; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+<p style="margin-left: 40px;" class="MsoNormal"><span style="font-family: 宋体; font-size: 10.5pt;"><o:p>&nbsp;</o:p></span></p>
+
+
+<div style="margin-left: 40px;">
+<script type="text/javascript" src="http://www.80eboy.com/common/js/share.js"></script>
+<script type="text/javascript" src="http://www.80eboy.com/common/js/baidutongji.js"></script></div>
+
+
+
+</body></html>
