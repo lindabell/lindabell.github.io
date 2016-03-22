@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <update>
     <appName>XuRiTiShi_V2_0_2.apk</appName>
     <versionCode>20002</versionCode>
@@ -6,7 +6,7 @@
     <date>20141119</date>
     <MD5>AA373DE8864887710B1FDA22E1E04B13</MD5>
         <fileSize>7776563</fileSize>
-    <downLink>http://www.80eboy.com/software/XuRiTiShi/XuRiTiShi_V2_0_2.apk</downLink>
+    <downLink>http://www.80eboy.com/soft/XuRiTiShi/XuRiTiShi_V2_0_2.apk</downLink>
     <note>
         <p>1.增加下载文件大小显示</p>
     </note>
