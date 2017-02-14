@@ -77,3 +77,9 @@
 * [MCP]更换户外在线状态为enum类型
 * [MCP]更改省流量为enum类型
 * **更改版本，与V0.1.0具有不兼容指令**
+
+## UpgradeV0.2.0@git20170214T151845
+ [下载升级固件](UpgradeV0.2.0@git20170214T151845.bin)
+ MD5: 55FBA0C4BD38D6F34768169A3F07A050
+**更新说明：**
+* [更改]使用wifi.80eboy.com代替wifi.somputon.com
