@@ -83,3 +83,9 @@
  MD5: 55FBA0C4BD38D6F34768169A3F07A050
 **更新说明：**
 * [更改]使用wifi.80eboy.com代替wifi.somputon.com
+
+## UpgradeV0.2.0@git20170217T151622
+ [下载升级固件](UpgradeV0.2.0@git20170217T151622.bin)
+ MD5: 725B64F4538133BCD068262FABB702BF
+**更新说明：**
+* [修改]TVOC计算CO2公式
