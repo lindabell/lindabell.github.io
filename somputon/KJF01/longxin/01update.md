@@ -6,14 +6,11 @@
 
 [TOC]
 
-## UpgradeV0.5.2@git20170727T095730
- [下载升级固件](UpgradeV0.5.2@git20170727T095730.bin)
- MD5: 81442A20A6219B9EB12F6AD49F5171E8
+## LongXin_UpgradeV0.6.1@git20170831T104518
+ [下载升级固件](LongXin_UpgradeV0.6.1@git20170831T104518.bin)
+ MD5: AEA2EB15B9B1D4F89F3E6FA3A099E9CB
 **更新说明：**
-* [增加]栈空间
-* [修正]由于硬件版本引起的兼容性问题
-* [增加]spi flash(W25Q32JVIQ)到参数列表中
-* [更改]由于去掉RFID而引起风压开关工作，重写该部分
+* [优化]全部数据上报时不上报获取官方PM2.5请求
 
 
 
