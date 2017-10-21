@@ -6,11 +6,19 @@
 
 [TOC]
 
-## LongXin_UpgradeV0.6.1@git20170831T104518
- [下载升级固件](LongXin_UpgradeV0.6.1@git20170831T104518.bin)
- MD5: AEA2EB15B9B1D4F89F3E6FA3A099E9CB
+## LongXinPcbV2.2UpgradeV1.0.1@git20171021T121505
+ [下载升级固件](LongXinPcbV2.2UpgradeV1.0.1@git20171021T121505.bin)
+ 
+MD5: 4CE6D92AAD788A8E3BD2168ED8B4837E
+
 **更新说明：**
-* [优化]全部数据上报时不上报获取官方PM2.5请求
+
+* [增加]触摸IIC读回出错处理
+* [去掉]净离子和UV灯功能
+* [修改]负离子持续开2小时后需要停30分钟;停止时负离子图标还是要显示
+* [修改]负离子默认不打开
+* [修改]上电全亮按键背光
+* [修改]请求官方PM2.5规则
 
 
 
